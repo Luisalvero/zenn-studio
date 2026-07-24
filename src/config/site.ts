@@ -76,7 +76,7 @@ export const siteConfig: SiteConfig = {
   email: 'luis@empcnet.com',
   // Paste your deployed Cloudflare Worker URL here to enable the live form
   // (until then, the form falls back to opening the visitor's email app).
-  contactEndpoint: '', // e.g. 'https://zenn-contact.<you>.workers.dev'
+  contactEndpoint: 'https://zenn-contact.luis-200.workers.dev',
   whatsapp: {
     number: '17864918568', // digits only, international format, for wa.me links
     display: '+1 (786) 491-8568',
