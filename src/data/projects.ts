@@ -19,7 +19,9 @@ export const projects: Project[] = [
     kind: 'Documentary teaser · made for XLNT Visual Studio',
     year: '2026',
     categories: ['Trailer', 'Documentary', 'Motion Graphics'],
-    thumbnail: '',
+    thumbnail: '/images/projects/xlnt-bjj-documentary-teaser/thumb.jpg',
+    previewVideo: '/images/projects/xlnt-bjj-documentary-teaser/preview.mp4',
+    orientation: 'portrait',
     video: { provider: 'drive', id: '1MaH2g5v3BsvZPVjcIOHWn3qUJ77k40MF' },
     collaborator: { name: 'XLNT Visual Studio', url: 'https://www.instagram.com/xlnt_visuals/' },
     overview:

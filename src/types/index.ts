@@ -50,6 +50,10 @@ export interface Project {
   /** Large hero image on the detail page. Falls back to thumbnail. */
   cover?: string
   video?: VideoEmbed
+  /** Portrait (9:16 reel) vs landscape (16:9). Affects card + player aspect. Default landscape. */
+  orientation?: 'landscape' | 'portrait'
+  /** Small muted clip (self-hosted mp4) for a YouTube-style hover preview on the card. */
+  previewVideo?: string
   /** Optional credit for a studio/person the piece was made with or for. */
   collaborator?: { name: string; url: string }
   /** Longer narrative fields for the detail page — all optional. */

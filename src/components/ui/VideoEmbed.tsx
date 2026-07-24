@@ -7,19 +7,23 @@ interface VideoEmbedProps {
   id: string
   title?: string
   className?: string
+  /** 'portrait' renders a 9:16 player (vertical reels); default is 16:9. */
+  orientation?: 'landscape' | 'portrait'
 }
 
 /**
- * Inline, responsive 16:9 video embed used on project pages. Falls back to a
- * tasteful placeholder while the final video is still being produced.
+ * Inline, responsive video embed used on project pages. Defaults to 16:9;
+ * portrait renders a 9:16 player for vertical reels. Falls back to a tasteful
+ * placeholder while the final video is still being produced.
  */
-export function VideoEmbed({ provider, id, title = 'Video', className }: VideoEmbedProps) {
+export function VideoEmbed({ provider, id, title = 'Video', className, orientation = 'landscape' }: VideoEmbedProps) {
   const hasVideo = id.trim().length > 0
 
   return (
     <div
       className={cn(
-        'relative aspect-video w-full overflow-hidden rounded-xl border border-white/10 bg-black',
+        'relative w-full overflow-hidden rounded-xl border border-white/10 bg-black',
+        orientation === 'portrait' ? 'aspect-[9/16]' : 'aspect-video',
         className,
       )}
     >

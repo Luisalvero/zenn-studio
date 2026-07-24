@@ -50,6 +50,7 @@ export function ProjectPage() {
   }
 
   const { prev, next } = getAdjacentProjects(project.slug)
+  const isPortrait = project.orientation === 'portrait'
   const hasNotes = Boolean(project.soundNotes || project.motionNotes || project.gradeNotes)
   const hasSidebar = Boolean(project.software?.length || project.techniques?.length)
   const hasNarrative = Boolean(
@@ -188,9 +189,16 @@ export function ProjectPage() {
           initial="hidden"
           whileInView="visible"
           viewport={viewportOnce}
-          className="overflow-hidden rounded-2xl shadow-2xl shadow-black/50 ring-1 ring-white/10"
+          className={`overflow-hidden rounded-2xl shadow-2xl shadow-black/50 ring-1 ring-white/10 ${
+            isPortrait ? 'mx-auto w-full max-w-[420px]' : ''
+          }`}
         >
-          <VideoEmbed provider={project.video?.provider ?? 'youtube'} id={project.video?.id ?? ''} title={project.title} />
+          <VideoEmbed
+            provider={project.video?.provider ?? 'youtube'}
+            id={project.video?.id ?? ''}
+            title={project.title}
+            orientation={isPortrait ? 'portrait' : 'landscape'}
+          />
         </motion.div>
       </Container>
 
