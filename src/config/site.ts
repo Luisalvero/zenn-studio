@@ -33,6 +33,8 @@ export interface SiteConfig {
   tagline: string
   availability: string
   email: string
+  /** Cloudflare Worker URL that emails the contact form via Resend. Empty = mailto fallback. */
+  contactEndpoint: string
   whatsapp: {
     /** Digits only, international format (no +, spaces or dashes) for wa.me. */
     number: string
@@ -72,6 +74,9 @@ export const siteConfig: SiteConfig = {
 
   // ── Contact ──────────────────────────────────────────────────────────────
   email: 'luis@empcnet.com',
+  // Paste your deployed Cloudflare Worker URL here to enable the live form
+  // (until then, the form falls back to opening the visitor's email app).
+  contactEndpoint: '', // e.g. 'https://zenn-contact.<you>.workers.dev'
   whatsapp: {
     number: '17864918568', // digits only, international format, for wa.me links
     display: '+1 (786) 491-8568',

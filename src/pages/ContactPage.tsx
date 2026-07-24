@@ -38,33 +38,59 @@ const channels = [
 const inputClasses =
   'w-full rounded-lg border border-white/10 bg-white/[0.02] px-4 py-3 text-bone placeholder:text-ash/70 transition-colors duration-300 focus:border-white/30 focus:outline-none focus:ring-1 focus:ring-white/20'
 
-export function ContactPage() {
-  const [sent, setSent] = useState(false)
+type Status = 'idle' | 'submitting' | 'success' | 'error'
 
-  // No backend yet: compose a pre-filled email the visitor can send. Swap this
-  // handler for a POST to Formspree/Netlify/your API when a form service is added.
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+export function ContactPage() {
+  const [status, setStatus] = useState<Status>('idle')
+  const [errorMsg, setErrorMsg] = useState('')
+  const useLiveForm = siteConfig.contactEndpoint.trim().length > 0
+
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
     const form = e.currentTarget
     const data = new FormData(form)
-    const name = String(data.get('name') || '')
-    const email = String(data.get('email') || '')
-    const projectType = String(data.get('projectType') || '')
-    const message = String(data.get('message') || '')
+    const payload = {
+      name: String(data.get('name') || ''),
+      email: String(data.get('email') || ''),
+      projectType: String(data.get('projectType') || ''),
+      message: String(data.get('message') || ''),
+      company: String(data.get('company') || ''), // honeypot — bots fill it, humans can't see it
+    }
 
-    const subject = `Project inquiry — ${projectType || 'General'} (${name})`
+    // Live form: POST to the Cloudflare Worker, which emails via Resend.
+    if (useLiveForm) {
+      setStatus('submitting')
+      setErrorMsg('')
+      try {
+        const res = await fetch(siteConfig.contactEndpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        })
+        const result = (await res.json().catch(() => ({}))) as { ok?: boolean; error?: string }
+        if (!res.ok || !result.ok) throw new Error(result.error || 'Something went wrong.')
+        form.reset()
+        setStatus('success')
+      } catch (err) {
+        setErrorMsg(err instanceof Error ? err.message : 'Something went wrong.')
+        setStatus('error')
+      }
+      return
+    }
+
+    // Fallback (no endpoint configured yet): open the visitor's email app.
+    const subject = `Project inquiry — ${payload.projectType || 'General'} (${payload.name})`
     const body = [
-      `Name: ${name}`,
-      `Email: ${email}`,
-      `Project type: ${projectType}`,
+      `Name: ${payload.name}`,
+      `Email: ${payload.email}`,
+      `Project type: ${payload.projectType}`,
       '',
-      message,
+      payload.message,
     ].join('\n')
-
     window.location.href = `mailto:${siteConfig.email}?subject=${encodeURIComponent(
       subject,
     )}&body=${encodeURIComponent(body)}`
-    setSent(true)
+    setStatus('success')
   }
 
   return (
@@ -134,10 +160,22 @@ export function ContactPage() {
                 Start a project
               </h2>
               <p className="mt-2 text-sm text-mist">
-                A few details to get us going. This opens your email app with everything filled in.
+                A few details to get us going.{' '}
+                {useLiveForm
+                  ? "It comes straight to my inbox — I'll reply personally."
+                  : 'This opens your email app with everything filled in.'}
               </p>
 
               <form onSubmit={handleSubmit} className="mt-8 flex flex-col gap-5">
+                {/* Honeypot: hidden from humans, catches bots */}
+                <input
+                  type="text"
+                  name="company"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  aria-hidden="true"
+                  className="hidden"
+                />
                 <div className="grid gap-5 sm:grid-cols-2">
                   <div className="flex flex-col gap-2">
                     <label htmlFor="name" className="text-xs uppercase tracking-[0.15em] text-ash">
@@ -188,16 +226,32 @@ export function ContactPage() {
 
                 <button
                   type="submit"
-                  className="group mt-1 inline-flex items-center justify-center gap-2.5 rounded-full bg-chalk px-8 py-4 text-sm font-medium text-void transition-all duration-500 hover:-translate-y-0.5 hover:bg-bone"
+                  disabled={status === 'submitting'}
+                  className="group mt-1 inline-flex items-center justify-center gap-2.5 rounded-full bg-chalk px-8 py-4 text-sm font-medium text-void transition-all duration-500 hover:-translate-y-0.5 hover:bg-bone disabled:pointer-events-none disabled:opacity-50"
                 >
-                  Send inquiry
+                  {status === 'submitting' ? 'Sending…' : 'Send inquiry'}
                   <Send className="h-4 w-4 transition-transform duration-500 group-hover:translate-x-0.5" />
                 </button>
 
-                {sent && (
+                {status === 'success' && (
                   <p className="text-sm text-silver" role="status">
-                    Your email app should have opened with the message ready to send. If it didn't, reach
-                    me directly at{' '}
+                    {useLiveForm
+                      ? "Thanks — your message is on its way. I'll get back to you soon."
+                      : 'Your email app should have opened with the message ready to send.'}{' '}
+                    {!useLiveForm && (
+                      <>
+                        If it didn't, reach me at{' '}
+                        <a href={contactLinks.email} className="text-chalk underline underline-offset-4">
+                          {siteConfig.email}
+                        </a>
+                        .
+                      </>
+                    )}
+                  </p>
+                )}
+                {status === 'error' && (
+                  <p className="text-sm text-ember-soft" role="alert">
+                    {errorMsg} You can also email me directly at{' '}
                     <a href={contactLinks.email} className="text-chalk underline underline-offset-4">
                       {siteConfig.email}
                     </a>
