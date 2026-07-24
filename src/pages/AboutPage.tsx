@@ -99,9 +99,9 @@ export function AboutPage() {
                 chase: the atmosphere underneath the images.
               </motion.p>
               <motion.p variants={fadeUp}>
-                Everything in my portfolio right now is personal or spec work — pieces I made to push
-                myself and explore ideas. I don't have years of client logos to show, and I'm not going
-                to pretend I do. What I can promise is genuine care, real technical ability, and a
+                Most of what I've made so far is personal work and early collaborations — pieces I've
+                poured myself into to grow. I don't have years of client logos to show, and I'm not
+                going to pretend I do. What I can promise is genuine care, real technical ability, and a
                 relentless eye for detail on whatever we make together.
               </motion.p>
               <motion.p variants={fadeUp} className="text-silver">

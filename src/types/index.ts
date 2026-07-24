@@ -16,7 +16,7 @@ export type ProjectCategory =
   | 'Horror'
 
 export interface VideoEmbed {
-  provider: 'youtube' | 'vimeo'
+  provider: 'youtube' | 'vimeo' | 'drive'
   /** The video ID only, not the full URL. Leave empty to show a placeholder. */
   id: string
 }
@@ -50,18 +50,20 @@ export interface Project {
   /** Large hero image on the detail page. Falls back to thumbnail. */
   cover?: string
   video?: VideoEmbed
-  /** Longer narrative fields for the detail page. */
-  overview: string
-  goals: string[]
-  direction: string
-  process: string
-  software: string[]
-  techniques: string[]
+  /** Optional credit for a studio/person the piece was made with or for. */
+  collaborator?: { name: string; url: string }
+  /** Longer narrative fields for the detail page — all optional. */
+  overview?: string
+  goals?: string[]
+  direction?: string
+  process?: string
+  software?: string[]
+  techniques?: string[]
   soundNotes?: string
   motionNotes?: string
   gradeNotes?: string
-  challenges: string
-  lessons: string
+  challenges?: string
+  lessons?: string
   stills?: ProjectImage[]
   timelineStills?: ProjectImage[]
   gradeComparisons?: GradeComparison[]

@@ -32,13 +32,13 @@ export function PortfolioPage() {
       <SEO
         title="Portfolio"
         path="/portfolio"
-        description="Selected personal projects and creative experiments — trailers, game cinematics, short films, sound design, and color grading by Zenn Studio."
+        description="Selected work by Zenn Studio — real projects and collaborations in cinematic editing, sound design, and color grading."
       />
 
       <PageHeader
         eyebrow="Current Portfolio"
         title="Selected work"
-        description="A growing collection of personal projects and spec work — each one a chance to push the craft further. Honest about where it started, serious about where it's going."
+        description="A growing collection of personal projects and collaborations — each one a chance to push the craft further. Honest about where it started, serious about where it's going."
       />
 
       <Section spacing="compact" className="pt-0">

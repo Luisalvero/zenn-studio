@@ -50,7 +50,67 @@ export function ProjectPage() {
   }
 
   const { prev, next } = getAdjacentProjects(project.slug)
-  const hasNotes = project.soundNotes || project.motionNotes || project.gradeNotes
+  const hasNotes = Boolean(project.soundNotes || project.motionNotes || project.gradeNotes)
+  const hasSidebar = Boolean(project.software?.length || project.techniques?.length)
+  const hasNarrative = Boolean(
+    project.overview || project.goals?.length || project.direction || project.process || hasNotes,
+  )
+  const hasReflection = Boolean(project.challenges || project.lessons)
+
+  const narrative = (
+    <div className="flex flex-col gap-16">
+      {project.overview && (
+        <Block label="Overview">
+          <p>{project.overview}</p>
+        </Block>
+      )}
+
+      {project.goals && project.goals.length > 0 && (
+        <Block label="Project goals" title="What I set out to do">
+          <ul className="flex flex-col gap-3">
+            {project.goals.map((g) => (
+              <li key={g} className="flex items-start gap-3">
+                <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-ash" />
+                <span>{g}</span>
+              </li>
+            ))}
+          </ul>
+        </Block>
+      )}
+
+      {project.direction && (
+        <Block label="Creative direction">
+          <p>{project.direction}</p>
+        </Block>
+      )}
+
+      {project.process && (
+        <Block label="Editing process">
+          <p>{project.process}</p>
+        </Block>
+      )}
+
+      {hasNotes && (
+        <div className="flex flex-col gap-10">
+          {project.soundNotes && (
+            <Block label="Sound design notes">
+              <p>{project.soundNotes}</p>
+            </Block>
+          )}
+          {project.motionNotes && (
+            <Block label="Motion graphics notes">
+              <p>{project.motionNotes}</p>
+            </Block>
+          )}
+          {project.gradeNotes && (
+            <Block label="Color grading notes">
+              <p>{project.gradeNotes}</p>
+            </Block>
+          )}
+        </div>
+      )}
+    </div>
+  )
 
   return (
     <>
@@ -103,6 +163,20 @@ export function ProjectPage() {
               <span aria-hidden>·</span>
               <span>{project.year}</span>
             </motion.div>
+
+            {project.collaborator && (
+              <motion.div variants={fadeUp}>
+                <a
+                  href={project.collaborator.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group inline-flex items-center gap-1.5 rounded-full border border-white/15 px-4 py-2 text-sm text-bone transition-colors hover:border-white/40 hover:bg-white/5"
+                >
+                  Made for {project.collaborator.name}
+                  <ArrowUpRight className="h-4 w-4 text-ash transition-transform duration-500 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </a>
+              </motion.div>
+            )}
           </motion.div>
         </Container>
       </header>
@@ -123,84 +197,48 @@ export function ProjectPage() {
       {/* Body */}
       <Section>
         <Container size="wide">
-          <div className="grid gap-16 lg:grid-cols-[1fr_2fr] lg:gap-20">
-            {/* Sticky meta sidebar */}
-            <div className="lg:sticky lg:top-28 lg:self-start">
-              <Reveal className="flex flex-col gap-8">
-                <div className="flex flex-col gap-2">
-                  <span className="eyebrow">Software</span>
-                  <ul className="flex flex-wrap gap-2">
-                    {project.software.map((s) => (
-                      <li key={s}>
-                        <Tag>{s}</Tag>
-                      </li>
-                    ))}
-                  </ul>
+          {hasNarrative &&
+            (hasSidebar ? (
+              <div className="grid gap-16 lg:grid-cols-[1fr_2fr] lg:gap-20">
+                {/* Sticky meta sidebar */}
+                <div className="lg:sticky lg:top-28 lg:self-start">
+                  <Reveal className="flex flex-col gap-8">
+                    {project.software && project.software.length > 0 && (
+                      <div className="flex flex-col gap-2">
+                        <span className="eyebrow">Software</span>
+                        <ul className="flex flex-wrap gap-2">
+                          {project.software.map((s) => (
+                            <li key={s}>
+                              <Tag>{s}</Tag>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                    {project.techniques && project.techniques.length > 0 && (
+                      <div className="flex flex-col gap-2">
+                        <span className="eyebrow">Techniques</span>
+                        <ul className="flex flex-col gap-2.5">
+                          {project.techniques.map((t) => (
+                            <li key={t} className="flex items-start gap-2.5 text-sm text-silver">
+                              <Check className="mt-0.5 h-4 w-4 shrink-0 text-ash" strokeWidth={2} />
+                              {t}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                  </Reveal>
                 </div>
-                <div className="flex flex-col gap-2">
-                  <span className="eyebrow">Techniques</span>
-                  <ul className="flex flex-col gap-2.5">
-                    {project.techniques.map((t) => (
-                      <li key={t} className="flex items-start gap-2.5 text-sm text-silver">
-                        <Check className="mt-0.5 h-4 w-4 shrink-0 text-ash" strokeWidth={2} />
-                        {t}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </Reveal>
-            </div>
-
-            {/* Narrative */}
-            <div className="flex flex-col gap-16">
-              <Block label="Overview">
-                <p>{project.overview}</p>
-              </Block>
-
-              <Block label="Project goals" title="What I set out to do">
-                <ul className="flex flex-col gap-3">
-                  {project.goals.map((g) => (
-                    <li key={g} className="flex items-start gap-3">
-                      <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-ash" />
-                      <span>{g}</span>
-                    </li>
-                  ))}
-                </ul>
-              </Block>
-
-              <Block label="Creative direction">
-                <p>{project.direction}</p>
-              </Block>
-
-              <Block label="Editing process">
-                <p>{project.process}</p>
-              </Block>
-
-              {hasNotes && (
-                <div className="flex flex-col gap-10">
-                  {project.soundNotes && (
-                    <Block label="Sound design notes">
-                      <p>{project.soundNotes}</p>
-                    </Block>
-                  )}
-                  {project.motionNotes && (
-                    <Block label="Motion graphics notes">
-                      <p>{project.motionNotes}</p>
-                    </Block>
-                  )}
-                  {project.gradeNotes && (
-                    <Block label="Color grading notes">
-                      <p>{project.gradeNotes}</p>
-                    </Block>
-                  )}
-                </div>
-              )}
-            </div>
-          </div>
+                {narrative}
+              </div>
+            ) : (
+              <div className="max-w-3xl">{narrative}</div>
+            ))}
 
           {/* Grade comparisons */}
           {project.gradeComparisons && project.gradeComparisons.length > 0 && (
-            <div className="mt-20">
+            <div className={hasNarrative ? 'mt-20' : ''}>
               <Reveal className="mb-8 flex flex-col gap-3">
                 <span className="eyebrow">Color grading</span>
                 <h2 className="font-display text-2xl font-semibold tracking-tight text-chalk sm:text-3xl">
@@ -270,42 +308,50 @@ export function ProjectPage() {
           )}
 
           {/* Reflection */}
-          <div className="mt-20 grid gap-10 border-t border-white/10 pt-16 md:grid-cols-2">
-            <Block label="Challenges">
-              <p>{project.challenges}</p>
-            </Block>
-            <Block label="Lessons learned">
-              <p>{project.lessons}</p>
-            </Block>
-          </div>
+          {hasReflection && (
+            <div className="mt-20 grid gap-10 border-t border-white/10 pt-16 md:grid-cols-2">
+              {project.challenges && (
+                <Block label="Challenges">
+                  <p>{project.challenges}</p>
+                </Block>
+              )}
+              {project.lessons && (
+                <Block label="Lessons learned">
+                  <p>{project.lessons}</p>
+                </Block>
+              )}
+            </div>
+          )}
 
-          {/* Prev / Next */}
-          <nav className="mt-20 grid gap-6 border-t border-white/10 pt-10 sm:grid-cols-2" aria-label="More projects">
-            {prev && (
-              <Link
-                to={`/portfolio/${prev.slug}`}
-                className="group flex flex-col gap-2 rounded-xl border border-white/10 p-6 transition-colors hover:border-white/25 hover:bg-white/[0.02]"
-              >
-                <span className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-ash">
-                  <ArrowLeft className="h-3.5 w-3.5 transition-transform duration-500 group-hover:-translate-x-1" />
-                  Previous
-                </span>
-                <span className="font-display text-lg font-semibold text-chalk">{prev.title}</span>
-              </Link>
-            )}
-            {next && (
-              <Link
-                to={`/portfolio/${next.slug}`}
-                className="group flex flex-col gap-2 rounded-xl border border-white/10 p-6 text-right transition-colors hover:border-white/25 hover:bg-white/[0.02] sm:col-start-2"
-              >
-                <span className="inline-flex items-center justify-end gap-2 text-xs uppercase tracking-[0.2em] text-ash">
-                  Next
-                  <ArrowRight className="h-3.5 w-3.5 transition-transform duration-500 group-hover:translate-x-1" />
-                </span>
-                <span className="font-display text-lg font-semibold text-chalk">{next.title}</span>
-              </Link>
-            )}
-          </nav>
+          {/* Prev / Next (only when there's more than one project) */}
+          {(prev || next) && (
+            <nav className="mt-20 grid gap-6 border-t border-white/10 pt-10 sm:grid-cols-2" aria-label="More projects">
+              {prev && (
+                <Link
+                  to={`/portfolio/${prev.slug}`}
+                  className="group flex flex-col gap-2 rounded-xl border border-white/10 p-6 transition-colors hover:border-white/25 hover:bg-white/[0.02]"
+                >
+                  <span className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-ash">
+                    <ArrowLeft className="h-3.5 w-3.5 transition-transform duration-500 group-hover:-translate-x-1" />
+                    Previous
+                  </span>
+                  <span className="font-display text-lg font-semibold text-chalk">{prev.title}</span>
+                </Link>
+              )}
+              {next && (
+                <Link
+                  to={`/portfolio/${next.slug}`}
+                  className="group flex flex-col gap-2 rounded-xl border border-white/10 p-6 text-right transition-colors hover:border-white/25 hover:bg-white/[0.02] sm:col-start-2"
+                >
+                  <span className="inline-flex items-center justify-end gap-2 text-xs uppercase tracking-[0.2em] text-ash">
+                    Next
+                    <ArrowRight className="h-3.5 w-3.5 transition-transform duration-500 group-hover:translate-x-1" />
+                  </span>
+                  <span className="font-display text-lg font-semibold text-chalk">{next.title}</span>
+                </Link>
+              )}
+            </nav>
+          )}
 
           <Reveal className="mt-16 flex justify-center">
             <Button to="/portfolio" variant="ghost" iconRight={<ArrowUpRight className="h-4 w-4" />}>

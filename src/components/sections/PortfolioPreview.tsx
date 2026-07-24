@@ -16,8 +16,8 @@ export function PortfolioPreview() {
         <div className="flex flex-col justify-between gap-8 sm:flex-row sm:items-end">
           <SectionHeading
             eyebrow="Selected Work"
-            title="Personal projects & creative experiments"
-            description="Every piece here is self-initiated — spec work made to sharpen the craft. Honest about where I am, serious about where it's going."
+            title="The work I'm proudest of"
+            description="A growing collection of personal projects and collaborations. Honest about where I am, serious about where it's going."
           />
           <div className="hidden shrink-0 sm:block">
             <Button to="/portfolio" variant="secondary" iconRight={<ArrowUpRight className="h-4 w-4" />}>
