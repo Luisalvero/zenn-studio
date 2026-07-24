@@ -10,6 +10,7 @@ export type ProjectCategory =
   | 'Sound Design'
   | 'Color Grading'
   | 'Motion Graphics'
+  | 'VFX'
   | 'Short Film'
   | 'Developer Log'
   | 'Documentary'

@@ -28,6 +28,19 @@ export const projects: Project[] = [
       'A fast-cut teaser reel edited to build anticipation for a Brazilian Jiu-Jitsu documentary by XLNT Visual Studio. The goal was pure energy and momentum — punchy, rhythmic editing that grabs attention and teases the story without giving it away.',
     featured: true,
   },
+  {
+    slug: 'vfx-demo-reel',
+    title: 'VFX Demo Reel',
+    summary: 'A demo reel showcasing visual effects and motion work — compositing, animation, and cinematic finishing.',
+    kind: 'VFX / motion demo reel',
+    year: '2026',
+    categories: ['VFX', 'Motion Graphics'],
+    thumbnail: '/images/projects/vfx-demo-reel/thumb.jpg',
+    previewVideo: '/images/projects/vfx-demo-reel/preview.mp4',
+    orientation: 'landscape',
+    video: { provider: 'drive', id: '1wDNFH8LioMaFqeXL4zfAP_3vZ5wS8fm2' },
+    featured: true,
+  },
 ]
 
 /** Convenience selectors. */
