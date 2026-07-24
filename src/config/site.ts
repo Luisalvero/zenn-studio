@@ -85,8 +85,8 @@ export const siteConfig: SiteConfig = {
     url: 'https://github.com/luisalvero',
   },
 
-  // Founder portrait — save your photo here (see note below).
-  portrait: '/images/portrait.jpg',
+  // Founder portrait.
+  portrait: '/images/portrait.png',
 
   // ── Featured showreel ────────────────────────────────────────────────────
   // Hosted on Google Drive for now. NOTE: for a portfolio showreel, YouTube or
