@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
-import { siteConfig, showreelWatchUrl } from '@/config/site'
-import { providerName } from '@/lib/video'
+import { siteConfig } from '@/config/site'
+import { useContent } from '@/lib/content'
+import { watchUrl, providerName, type VideoProvider } from '@/lib/video'
 import { Section } from '@/components/ui/Section'
 import { Container } from '@/components/ui/Container'
 import { VideoEmbed } from '@/components/ui/VideoEmbed'
@@ -9,6 +10,10 @@ import { imageReveal, viewportOnce } from '@/lib/animations'
 
 /** The featured showreel — a large, minimal, embedded video. */
 export function FeaturedReel() {
+  const { get } = useContent()
+  const provider = get('showreel_provider') as VideoProvider
+  const id = get('showreel_id')
+
   return (
     <Section spacing="compact" aria-label="Showreel">
       <Container size="wide">
@@ -21,12 +26,12 @@ export function FeaturedReel() {
           </Reveal>
           <Reveal delay={0.1}>
             <a
-              href={showreelWatchUrl()}
+              href={watchUrl(provider, id)}
               target="_blank"
               rel="noopener noreferrer"
               className="text-sm text-mist underline-offset-4 transition-colors hover:text-chalk hover:underline"
             >
-              Watch on {providerName(siteConfig.showreel.provider)} ↗
+              Watch on {providerName(provider)} ↗
             </a>
           </Reveal>
         </div>
@@ -38,11 +43,7 @@ export function FeaturedReel() {
           viewport={viewportOnce}
           className="overflow-hidden rounded-2xl shadow-2xl shadow-black/50 ring-1 ring-white/10"
         >
-          <VideoEmbed
-            provider={siteConfig.showreel.provider}
-            id={siteConfig.showreel.id}
-            title={siteConfig.showreel.title}
-          />
+          <VideoEmbed provider={provider} id={id} title={siteConfig.showreel.title} />
         </motion.div>
       </Container>
     </Section>

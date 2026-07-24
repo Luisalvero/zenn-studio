@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { ArrowUpRight } from 'lucide-react'
 import { siteConfig } from '@/config/site'
+import { useContent } from '@/lib/content'
 import { Section } from '@/components/ui/Section'
 import { Container } from '@/components/ui/Container'
 import { Button } from '@/components/ui/Button'
@@ -12,6 +13,7 @@ const pillars = ['Editing', 'Color', 'Sound', 'Rhythm', 'Emotion']
 
 /** Homepage about preview — the person behind the work. */
 export function AboutPreview() {
+  const { get } = useContent()
   return (
     <Section id="about" aria-label="About">
       <Container size="wide">
@@ -51,9 +53,7 @@ export function AboutPreview() {
               Obsessed with the feeling a cut can create.
             </motion.h2>
             <motion.p variants={fadeUp} className="text-base leading-relaxed text-mist sm:text-lg">
-              I'm {siteConfig.founder}, and Zenn Studio is where I'm building a career in cinematic
-              post-production. I care less about flashy effects and more about the quiet things — the
-              length of a hold, the weight of a sound, the exact moment to cut.
+              {get('about_intro')}
             </motion.p>
             <motion.p variants={fadeUp} className="text-base leading-relaxed text-mist">
               I specialize in creating cinematic experiences through editing, color, sound, rhythm, and

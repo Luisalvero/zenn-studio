@@ -2,6 +2,7 @@ import { useState, type FormEvent } from 'react'
 import { motion } from 'framer-motion'
 import { Mail, Clock, Send } from 'lucide-react'
 import { siteConfig, contactLinks } from '@/config/site'
+import { useContent } from '@/lib/content'
 import { services } from '@/data/services'
 import { SEO } from '@/components/ui/SEO'
 import { PageHeader } from '@/components/layout/PageHeader'
@@ -43,6 +44,7 @@ type Status = 'idle' | 'submitting' | 'success' | 'error'
 export function ContactPage() {
   const [status, setStatus] = useState<Status>('idle')
   const [errorMsg, setErrorMsg] = useState('')
+  const { get } = useContent()
   const useLiveForm = siteConfig.contactEndpoint.trim().length > 0
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
@@ -142,7 +144,7 @@ export function ContactPage() {
               >
                 <Clock className="mt-0.5 h-4 w-4 shrink-0 text-ash" />
                 <p>
-                  {siteConfig.availability}. I'm selective so I can give each project real attention —
+                  {get('availability')}. I'm selective so I can give each project real attention —
                   which means yours gets it too.
                 </p>
               </motion.div>

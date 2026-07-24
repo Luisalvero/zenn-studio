@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { Mail } from 'lucide-react'
 import { siteConfig, contactLinks } from '@/config/site'
+import { useContent } from '@/lib/content'
 import { Container } from '@/components/ui/Container'
 import { InstagramIcon, GithubIcon } from '@/components/ui/BrandIcons'
 
@@ -12,6 +13,7 @@ const socials = [
 
 export function Footer() {
   const year = new Date().getFullYear()
+  const { get } = useContent()
 
   return (
     <footer className="relative border-t border-white/10 bg-ink">
@@ -26,7 +28,7 @@ export function Footer() {
               Cinematic editing, sound design, and color — building a body of work and open for new
               collaborations.
             </p>
-            <span className="text-xs uppercase tracking-[0.2em] text-ash">{siteConfig.availability}</span>
+            <span className="text-xs uppercase tracking-[0.2em] text-ash">{get('availability')}</span>
           </div>
 
           {/* Navigate */}

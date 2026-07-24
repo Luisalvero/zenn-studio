@@ -4,6 +4,7 @@ import { Loader2, LogOut, Inbox, SlidersHorizontal, Film, ArrowLeft, ShieldAlert
 import { SEO } from '@/components/ui/SEO'
 import { GoogleIcon } from '@/components/ui/BrandIcons'
 import { LeadsPanel } from '@/components/admin/LeadsPanel'
+import { ContentPanel } from '@/components/admin/ContentPanel'
 import { useAuth } from '@/hooks/useAuth'
 import { ADMIN_EMAIL } from '@/lib/supabase'
 import { cn } from '@/lib/utils'
@@ -21,7 +22,7 @@ function AdminShell({ children }: { children: ReactNode }) {
 type Tab = 'leads' | 'content' | 'portfolio'
 const TABS = [
   { key: 'leads', label: 'Leads', icon: Inbox, soon: false },
-  { key: 'content', label: 'Content', icon: SlidersHorizontal, soon: true },
+  { key: 'content', label: 'Content', icon: SlidersHorizontal, soon: false },
   { key: 'portfolio', label: 'Portfolio', icon: Film, soon: true },
 ] as const
 
@@ -139,7 +140,7 @@ export function AdminPage() {
               </nav>
 
               {tab === 'leads' && <LeadsPanel />}
-              {tab === 'content' && <ComingSoon label="Content editing" />}
+              {tab === 'content' && <ContentPanel />}
               {tab === 'portfolio' && <ComingSoon label="Portfolio editor" />}
 
               <Link

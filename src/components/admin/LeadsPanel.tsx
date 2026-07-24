@@ -140,7 +140,9 @@ export function LeadsPanel() {
 
               <div className="mt-4 flex flex-wrap gap-2 border-t border-white/5 pt-4">
                 <a
-                  href={`mailto:${lead.email}?subject=${encodeURIComponent('Re: your Zenn Studio inquiry')}`}
+                  href={`https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(lead.email)}&su=${encodeURIComponent('Re: your Zenn Studio inquiry')}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="inline-flex items-center gap-1.5 rounded-full bg-chalk px-3.5 py-1.5 text-xs font-medium text-void transition-colors hover:bg-bone"
                 >
                   <Mail className="h-3.5 w-3.5" /> Reply

@@ -8,11 +8,14 @@ import '@fontsource-variable/manrope'
 import './index.css'
 
 import { App } from './App'
+import { ContentProvider } from './lib/content'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
-      <App />
+      <ContentProvider>
+        <App />
+      </ContentProvider>
     </BrowserRouter>
   </StrictMode>,
 )

@@ -9,6 +9,8 @@ import {
 } from 'framer-motion'
 import { Play, ArrowUpRight, ArrowDown } from 'lucide-react'
 import { siteConfig } from '@/config/site'
+import { useContent } from '@/lib/content'
+import type { VideoProvider } from '@/lib/video'
 import { Button } from '@/components/ui/Button'
 import { VideoModal } from '@/components/ui/VideoModal'
 import { fadeUp, staggerContainer } from '@/lib/animations'
@@ -17,6 +19,7 @@ export function Hero() {
   const ref = useRef<HTMLElement>(null)
   const [reelOpen, setReelOpen] = useState(false)
   const reduceMotion = useReducedMotion()
+  const { get } = useContent()
 
   // Scroll parallax: content drifts up + fades; the background drifts slower.
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] })
@@ -87,18 +90,17 @@ export function Hero() {
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-ember-soft opacity-75" />
               <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-ember" />
             </span>
-            {siteConfig.availability}
+            {get('availability')}
           </motion.span>
 
           <motion.h1 variants={fadeUp} className="text-hero font-display font-semibold text-chalk">
-            Crafting stories through
+            {get('hero_line1')}
             <br />
-            <span className="text-mist">editing, sound, and color.</span>
+            <span className="text-mist">{get('hero_line2')}</span>
           </motion.h1>
 
           <motion.p variants={fadeUp} className="max-w-xl text-lg leading-relaxed text-silver">
-            I'm {siteConfig.founder} — building Zenn Studio one film at a time. Cinematic edits made
-            with obsessive attention to pacing, atmosphere, and detail.
+            {get('hero_paragraph')}
           </motion.p>
 
           <motion.div variants={fadeUp} className="flex flex-col gap-4 pt-2 sm:flex-row sm:items-center">
@@ -140,8 +142,8 @@ export function Hero() {
       <VideoModal
         open={reelOpen}
         onClose={() => setReelOpen(false)}
-        provider={siteConfig.showreel.provider}
-        id={siteConfig.showreel.id}
+        provider={get('showreel_provider') as VideoProvider}
+        id={get('showreel_id')}
         title={siteConfig.showreel.title}
       />
     </section>
