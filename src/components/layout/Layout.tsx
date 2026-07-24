@@ -2,6 +2,7 @@ import { Outlet } from 'react-router-dom'
 import { Navbar } from './Navbar'
 import { Footer } from './Footer'
 import { ScrollToTop } from './ScrollToTop'
+import { ScrollProgress } from './ScrollProgress'
 import { GrainOverlay } from '@/components/ui/GrainOverlay'
 
 /** App shell: fixed nav, animated grain, routed page content, footer. */
@@ -9,6 +10,7 @@ export function Layout() {
   return (
     <>
       <ScrollToTop />
+      <ScrollProgress />
       <GrainOverlay />
 
       <a
