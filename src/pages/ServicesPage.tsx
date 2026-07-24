@@ -21,14 +21,15 @@ export function ServicesPage() {
         description="Post-production services from Zenn Studio — trailer editing, gameplay cinematics, developer logs, short films, sound design, color grading, and motion graphics. Contact for a custom quote."
       />
 
-      <div className="relative overflow-hidden">
+      <div className="relative isolate overflow-hidden">
         <VideoBackground
           src="/images/textures/edit-timelapse.mp4"
           poster="/images/textures/edit-timelapse.jpg"
           attachment="absolute"
-          className="-z-10"
+          className="z-0"
         />
 
+        <div className="relative z-10">
         <PageHeader
           eyebrow="Services"
           title="What I can make with you"
@@ -81,6 +82,7 @@ export function ServicesPage() {
           </motion.div>
         </Container>
         </Section>
+        </div>
       </div>
 
       <ProcessSection />

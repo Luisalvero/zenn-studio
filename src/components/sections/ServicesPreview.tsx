@@ -17,14 +17,14 @@ import { fadeUp, staggerContainer, viewportOnce } from '@/lib/animations'
  */
 export function ServicesPreview() {
   return (
-    <Section id="services" className="relative overflow-hidden border-t border-white/5" aria-label="Services">
+    <Section id="services" className="relative isolate overflow-hidden border-t border-white/5" aria-label="Services">
       <VideoBackground
         src="/images/textures/edit-timelapse.mp4"
         poster="/images/textures/edit-timelapse.jpg"
         attachment="absolute"
-        className="-z-10"
+        className="z-0"
       />
-      <Container size="wide">
+      <Container size="wide" className="relative z-10">
         <SectionHeading
           eyebrow="What I do"
           title="Services"

@@ -12,9 +12,12 @@ interface VideoBackgroundProps {
 }
 
 /**
- * Muted, looping video used purely as background texture. Heavily darkened so
- * it never competes with content. Respects reduced-motion by falling back to a
- * static poster (no autoplay). Decorative and non-interactive.
+ * Muted, looping video used as background texture. Darkened enough to sit
+ * behind content but still visible. Respects reduced-motion by falling back to
+ * a static poster (no autoplay). Decorative and non-interactive.
+ *
+ * Usage: put on a `relative isolate overflow-hidden` parent with `className="z-0"`,
+ * and give the content a `relative z-10` wrapper so it sits on top.
  */
 export function VideoBackground({
   src,
@@ -35,7 +38,7 @@ export function VideoBackground({
       )}
     >
       {reduce ? (
-        <img src={poster} alt="" className="h-full w-full object-cover opacity-60" />
+        <img src={poster} alt="" className="h-full w-full object-cover" />
       ) : (
         <video
           src={src}
@@ -44,15 +47,14 @@ export function VideoBackground({
           muted
           loop
           playsInline
-          preload="metadata"
           disablePictureInPicture
-          className="h-full w-full object-cover opacity-60"
+          className="h-full w-full object-cover"
         />
       )}
 
-      {/* Dark treatment so the texture reads as atmosphere, never content */}
-      <div className={cn('absolute inset-0 bg-void/75', overlayClassName)} />
-      <div className="absolute inset-0 bg-gradient-to-b from-void via-void/60 to-void" />
+      {/* Dark treatment: modest flat darken + edge fade so it blends into black */}
+      <div className={cn('absolute inset-0 bg-void/45', overlayClassName)} />
+      <div className="absolute inset-0 bg-gradient-to-b from-void via-transparent to-void" />
     </div>
   )
 }
