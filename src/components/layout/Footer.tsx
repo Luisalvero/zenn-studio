@@ -20,7 +20,7 @@ export function Footer() {
           {/* Brand */}
           <div className="flex flex-col gap-5">
             <span className="font-display text-2xl font-semibold tracking-tight text-chalk">
-              LA Productions
+              Zenn Studio
             </span>
             <p className="max-w-xs text-sm leading-relaxed text-mist">
               Cinematic editing, sound design, and color — building a body of work and open for new
@@ -68,7 +68,7 @@ export function Footer() {
 
         <div className="mt-16 flex flex-col items-start justify-between gap-4 border-t border-white/5 pt-8 text-xs text-ash sm:flex-row sm:items-center">
           <p>
-            © {year} LA Productions. Crafted by {siteConfig.founder}.
+            © {year} Zenn Studio. Crafted by {siteConfig.founder}.
           </p>
           <p className="text-ash/70">Personal &amp; spec work — building the portfolio.</p>
         </div>

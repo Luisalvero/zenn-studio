@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { siteConfig, showreelWatchUrl } from '@/config/site'
+import { providerName } from '@/lib/video'
 import { Section } from '@/components/ui/Section'
 import { Container } from '@/components/ui/Container'
 import { VideoEmbed } from '@/components/ui/VideoEmbed'
@@ -25,7 +26,7 @@ export function FeaturedReel() {
               rel="noopener noreferrer"
               className="text-sm text-mist underline-offset-4 transition-colors hover:text-chalk hover:underline"
             >
-              Watch on {siteConfig.showreel.provider === 'vimeo' ? 'Vimeo' : 'YouTube'} ↗
+              Watch on {providerName(siteConfig.showreel.provider)} ↗
             </a>
           </Reveal>
         </div>

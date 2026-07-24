@@ -1,9 +1,9 @@
 {
-  "name": "la-productions",
+  "name": "zenn-studio",
   "private": true,
   "version": "0.1.0",
   "type": "module",
-  "description": "LA Productions — cinematic editing, sound design & post-production portfolio.",
+  "description": "Zenn Studio — cinematic editing, sound design & post-production portfolio.",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",

@@ -17,7 +17,7 @@ export function ServicesPage() {
       <SEO
         title="Services"
         path="/services"
-        description="Post-production services from LA Productions — trailer editing, gameplay cinematics, developer logs, short films, sound design, color grading, and motion graphics. Contact for a custom quote."
+        description="Post-production services from Zenn Studio — trailer editing, gameplay cinematics, developer logs, short films, sound design, color grading, and motion graphics. Contact for a custom quote."
       />
 
       <PageHeader

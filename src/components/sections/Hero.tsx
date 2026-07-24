@@ -59,7 +59,7 @@ export function Hero() {
           </motion.h1>
 
           <motion.p variants={fadeUp} className="max-w-xl text-lg leading-relaxed text-mist">
-            I'm {siteConfig.founder} — building LA Productions one film at a time. Cinematic edits made
+            I'm {siteConfig.founder} — building Zenn Studio one film at a time. Cinematic edits made
             with obsessive attention to pacing, atmosphere, and detail.
           </motion.p>
 

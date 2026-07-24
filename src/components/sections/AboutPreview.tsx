@@ -25,8 +25,8 @@ export function AboutPreview() {
             className="order-last lg:order-first"
           >
             <Image
-              src=""
-              alt={`${siteConfig.founder} — editor and founder of LA Productions`}
+              src={siteConfig.portrait}
+              alt={`${siteConfig.founder} — editor and founder of ${siteConfig.name}`}
               placeholderLabel="Portrait — add your photo"
               ratio="4/5"
               className="border border-white/10"
@@ -51,7 +51,7 @@ export function AboutPreview() {
               Obsessed with the feeling a cut can create.
             </motion.h2>
             <motion.p variants={fadeUp} className="text-base leading-relaxed text-mist sm:text-lg">
-              I'm {siteConfig.founder}, and LA Productions is where I'm building a career in cinematic
+              I'm {siteConfig.founder}, and Zenn Studio is where I'm building a career in cinematic
               post-production. I care less about flashy effects and more about the quiet things — the
               length of a hold, the weight of a sound, the exact moment to cut.
             </motion.p>

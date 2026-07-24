@@ -52,13 +52,13 @@ export function AboutPage() {
       <SEO
         title="About"
         path="/about"
-        description={`About ${siteConfig.founder} — the editor behind LA Productions. Passionate about cinematic storytelling through editing, color, sound, rhythm, and emotion.`}
+        description={`About ${siteConfig.founder} — the editor behind Zenn Studio. Passionate about cinematic storytelling through editing, color, sound, rhythm, and emotion.`}
       />
 
       <PageHeader
         eyebrow="About"
         title="The person behind the cuts"
-        description="LA Productions is one editor, building something real — obsessed with pacing, atmosphere, and the feeling a piece leaves behind."
+        description="Zenn Studio is one editor, building something real — obsessed with pacing, atmosphere, and the feeling a piece leaves behind."
       />
 
       {/* Narrative */}
@@ -73,8 +73,8 @@ export function AboutPage() {
               className="lg:sticky lg:top-28"
             >
               <Image
-                src=""
-                alt={`${siteConfig.founder}, editor and founder of LA Productions`}
+                src={siteConfig.portrait}
+                alt={`${siteConfig.founder}, editor and founder of ${siteConfig.name}`}
                 placeholderLabel="Portrait — add your photo"
                 ratio="4/5"
                 className="border border-white/10"
@@ -89,7 +89,7 @@ export function AboutPage() {
               className="flex flex-col gap-6 text-base leading-relaxed text-mist sm:text-lg"
             >
               <motion.p variants={fadeUp}>
-                Hi — I'm {siteConfig.founder}. LA Productions is the name I'm building my post-production
+                Hi — I'm {siteConfig.founder}. Zenn Studio is the name I'm building my post-production
                 work under, and right now, it's just me: writing, cutting, designing sound, and grading
                 every frame myself.
               </motion.p>

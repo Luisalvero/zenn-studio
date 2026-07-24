@@ -32,7 +32,7 @@ export function PortfolioPage() {
       <SEO
         title="Portfolio"
         path="/portfolio"
-        description="Selected personal projects and creative experiments — trailers, game cinematics, short films, sound design, and color grading by LA Productions."
+        description="Selected personal projects and creative experiments — trailers, game cinematics, short films, sound design, and color grading by Zenn Studio."
       />
 
       <PageHeader

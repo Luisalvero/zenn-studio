@@ -1,6 +1,6 @@
-# LA Productions — Portfolio
+# Zenn Studio — Portfolio
 
-The portfolio and creative home of **Luis Alvero** / LA Productions — cinematic
+The portfolio and creative home of **Luis Alvero** / Zenn Studio — cinematic
 video editing, sound design, and color grading. Built to feel like a boutique
 post-production studio: minimal, dark, cinematic, and intentional.
 
@@ -112,7 +112,7 @@ This repo deploys automatically via GitHub Actions (`.github/workflows/deploy.ym
 The site is configured for a **custom domain** served from the root:
 
 - `vite.config.ts` → `base: '/'`
-- `public/CNAME` → contains your domain (currently `laproductions.com` — **change
+- `public/CNAME` → contains your domain (currently `zennvoi.com` — **change
   this** to your real domain)
 - In **Settings → Pages**, add the same custom domain and enable
   **Enforce HTTPS**.
@@ -153,4 +153,4 @@ component library are set up so these can be layered in without rework.
 
 ---
 
-© LA Productions. Crafted by Luis Alvero.
+© Zenn Studio. Crafted by Luis Alvero.

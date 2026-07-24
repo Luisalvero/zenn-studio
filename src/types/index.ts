@@ -1,5 +1,5 @@
 /**
- * Shared domain types for LA Productions.
+ * Shared domain types for Zenn Studio.
  * Keeping these centralised lets the data files and components stay in sync.
  */
 

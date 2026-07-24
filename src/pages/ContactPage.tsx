@@ -72,7 +72,7 @@ export function ContactPage() {
       <SEO
         title="Contact"
         path="/contact"
-        description="Start a project with LA Productions. Reach out via WhatsApp, Instagram, or email — open for new collaborations with creators, developers, filmmakers, and small businesses."
+        description="Start a project with Zenn Studio. Reach out via WhatsApp, Instagram, or email — open for new collaborations with creators, developers, filmmakers, and small businesses."
       />
 
       <PageHeader

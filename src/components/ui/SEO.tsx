@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { siteConfig } from '@/config/site'
 
 interface SEOProps {
-  /** Page-specific title. Rendered as "Title — LA Productions" unless it is the home page. */
+  /** Page-specific title. Rendered as "Title — Zenn Studio" unless it is the home page. */
   title?: string
   description?: string
   /** Route path (e.g. "/portfolio") used to build the canonical + og:url. */

@@ -24,7 +24,7 @@ export function HomePage() {
     <>
       <SEO
         path="/"
-        description="LA Productions — cinematic video editing, sound design, and color grading by Luis Alvero. Personal films and spec work, open for new collaborations."
+        description="Zenn Studio — cinematic video editing, sound design, and color grading by Luis Alvero. Personal films and spec work, open for new collaborations."
       />
       <Hero />
       <FeaturedReel />

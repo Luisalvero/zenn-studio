@@ -1,10 +1,12 @@
 /**
- * LA PRODUCTIONS — Central site configuration
+ * ZENN STUDIO — Central site configuration
  * ---------------------------------------------------------------------------
  * Every piece of brand, contact, and social information lives here so the rest
  * of the app never hard-codes a handle or URL. Replace the values marked
  * `TODO` with your real details — nothing else in the codebase needs to change.
  */
+
+import { embedUrl, watchUrl } from '@/lib/video'
 
 export interface NavItem {
   label: string
@@ -44,8 +46,10 @@ export interface SiteConfig {
     handle: string
     url: string
   }
+  /** Path to the founder portrait in /public (shown on About). */
+  portrait: string
   showreel: {
-    provider: 'youtube' | 'vimeo'
+    provider: 'youtube' | 'vimeo' | 'drive'
     /** The video ID only, not the full URL. */
     id: string
     title: string
@@ -54,38 +58,44 @@ export interface SiteConfig {
 }
 
 export const siteConfig: SiteConfig = {
-  name: 'LA Productions',
-  shortName: 'LA',
+  name: 'Zenn Studio',
+  shortName: 'Zenn',
   founder: 'Luis Alvero',
   role: 'Video Editor & Post-Production Artist',
-  title: 'LA Productions — Cinematic Editing, Sound Design & Color',
+  title: 'Zenn Studio — Cinematic Editing, Sound Design & Color',
   description:
-    'LA Productions is the creative studio of Luis Alvero — cinematic video editing, sound design, and color grading. Building a portfolio of personal films and open for new collaborations.',
-  url: 'https://laproductions.com',
+    'Zenn Studio is the creative studio of Luis Alvero — cinematic video editing, sound design, and color grading. Building a portfolio of personal films and open for new collaborations.',
+  url: 'https://zennvoi.com',
   locale: 'en_US',
   tagline: 'Crafting stories through editing, sound, and color.',
   availability: 'Open for collaborations · Remote, worldwide',
 
   // ── Contact ──────────────────────────────────────────────────────────────
-  email: 'emilacosta@gmail.com',
+  email: 'luis@empcnet.com',
   whatsapp: {
-    number: '10000000000', // TODO: replace with your WhatsApp Business number (digits only)
-    display: '+1 (000) 000-0000', // TODO: replace with a human-readable version
+    number: '17864918568', // digits only, international format, for wa.me links
+    display: '+1 (786) 491-8568',
   },
   instagram: {
-    handle: 'laproductions', // TODO: replace with your Instagram handle (no @)
-    url: 'https://instagram.com/laproductions', // TODO
+    handle: '3choedreal',
+    url: 'https://www.instagram.com/3choedreal/',
   },
   github: {
-    handle: 'luisalvero', // TODO: replace with your GitHub username
-    url: 'https://github.com/luisalvero', // TODO
+    handle: 'luisalvero',
+    url: 'https://github.com/luisalvero',
   },
 
+  // Founder portrait — save your photo here (see note below).
+  portrait: '/images/portrait.jpg',
+
   // ── Featured showreel ────────────────────────────────────────────────────
+  // Hosted on Google Drive for now. NOTE: for a portfolio showreel, YouTube or
+  // Vimeo is strongly recommended (better player, faster load, no Drive quota
+  // limits, and it's indexable). To switch, set provider + id to that video.
   showreel: {
-    provider: 'youtube',
-    id: 'ScMzIvxBSi4', // TODO: replace with your real showreel video ID
-    title: 'LA Productions — Showreel',
+    provider: 'drive',
+    id: '1t_00jFv2aCJwuba3fkzDR5qArXkldCpj',
+    title: 'Showreel',
   },
 
   // ── Navigation ───────────────────────────────────────────────────────────
@@ -102,7 +112,7 @@ export const siteConfig: SiteConfig = {
 
 export const contactLinks = {
   email: `mailto:${siteConfig.email}`,
-  emailWithSubject: (subject = 'Project inquiry — LA Productions') =>
+  emailWithSubject: (subject = 'Project inquiry — Zenn Studio') =>
     `mailto:${siteConfig.email}?subject=${encodeURIComponent(subject)}`,
   whatsapp: (message = "Hi Luis, I'd love to talk about a project.") =>
     `https://wa.me/${siteConfig.whatsapp.number}?text=${encodeURIComponent(message)}`,
@@ -112,21 +122,10 @@ export const contactLinks = {
 
 /** Full watch URL for the showreel, derived from the provider + id. */
 export function showreelWatchUrl(): string {
-  const { provider, id } = siteConfig.showreel
-  return provider === 'vimeo'
-    ? `https://vimeo.com/${id}`
-    : `https://www.youtube.com/watch?v=${id}`
+  return watchUrl(siteConfig.showreel.provider, siteConfig.showreel.id)
 }
 
-/** Privacy-friendly embed URL (no-cookie for YouTube). */
+/** Embed URL for the showreel (no-cookie YouTube / clean Vimeo / Drive preview). */
 export function showreelEmbedUrl(autoplay = false): string {
-  const { provider, id } = siteConfig.showreel
-  if (provider === 'vimeo') {
-    return `https://player.vimeo.com/video/${id}?title=0&byline=0&portrait=0${
-      autoplay ? '&autoplay=1' : ''
-    }`
-  }
-  return `https://www.youtube-nocookie.com/embed/${id}?rel=0&modestbranding=1${
-    autoplay ? '&autoplay=1' : ''
-  }`
+  return embedUrl(siteConfig.showreel.provider, siteConfig.showreel.id, autoplay)
 }
