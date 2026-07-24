@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react'
 import { useReducedMotion } from 'framer-motion'
 import { cn } from '@/lib/utils'
 
@@ -27,6 +28,16 @@ export function VideoBackground({
   className,
 }: VideoBackgroundProps) {
   const reduce = useReducedMotion()
+  const videoRef = useRef<HTMLVideoElement>(null)
+
+  // Force the muted *property* (JSX only sets the attribute) and kick off
+  // playback — otherwise browsers block muted autoplay and it sits on the poster.
+  useEffect(() => {
+    const v = videoRef.current
+    if (!v || reduce) return
+    v.muted = true
+    v.play().catch(() => {})
+  }, [reduce])
 
   return (
     <div
@@ -41,6 +52,7 @@ export function VideoBackground({
         <img src={poster} alt="" className="h-full w-full object-cover" />
       ) : (
         <video
+          ref={videoRef}
           src={src}
           poster={poster}
           autoPlay
