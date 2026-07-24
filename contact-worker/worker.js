@@ -55,6 +55,24 @@ export default {
       message,
     ].join('\n')
 
+    // Save to Supabase for the admin dashboard (best-effort; email is primary).
+    if (env.SUPABASE_URL && env.SUPABASE_SERVICE_ROLE_KEY) {
+      try {
+        await fetch(`${env.SUPABASE_URL}/rest/v1/leads`, {
+          method: 'POST',
+          headers: {
+            apikey: env.SUPABASE_SERVICE_ROLE_KEY,
+            Authorization: `Bearer ${env.SUPABASE_SERVICE_ROLE_KEY}`,
+            'Content-Type': 'application/json',
+            Prefer: 'return=minimal',
+          },
+          body: JSON.stringify({ name, email, project_type: projectType || null, message }),
+        })
+      } catch {
+        // ignore — the email below is the primary channel
+      }
+    }
+
     const resendRes = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: {

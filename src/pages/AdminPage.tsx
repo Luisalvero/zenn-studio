@@ -1,10 +1,12 @@
-import type { ReactNode } from 'react'
+import { useState, type ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 import { Loader2, LogOut, Inbox, SlidersHorizontal, Film, ArrowLeft, ShieldAlert } from 'lucide-react'
 import { SEO } from '@/components/ui/SEO'
 import { GoogleIcon } from '@/components/ui/BrandIcons'
+import { LeadsPanel } from '@/components/admin/LeadsPanel'
 import { useAuth } from '@/hooks/useAuth'
 import { ADMIN_EMAIL } from '@/lib/supabase'
+import { cn } from '@/lib/utils'
 
 /** Full-screen dark shell for the admin (no public nav/footer). */
 function AdminShell({ children }: { children: ReactNode }) {
@@ -16,20 +18,21 @@ function AdminShell({ children }: { children: ReactNode }) {
   )
 }
 
-const featureCards = [
-  { icon: Inbox, title: 'Leads', body: 'Every contact-form inquiry, in one place.' },
-  { icon: SlidersHorizontal, title: 'Content', body: 'Availability, hero & about copy, showreel.' },
-  { icon: Film, title: 'Portfolio', body: 'Add, edit, and reorder your projects.' },
-]
+type Tab = 'leads' | 'content' | 'portfolio'
+const TABS = [
+  { key: 'leads', label: 'Leads', icon: Inbox, soon: false },
+  { key: 'content', label: 'Content', icon: SlidersHorizontal, soon: true },
+  { key: 'portfolio', label: 'Portfolio', icon: Film, soon: true },
+] as const
 
 export function AdminPage() {
   const { user, loading, isAdmin, signIn, signOut } = useAuth()
+  const [tab, setTab] = useState<Tab>('leads')
 
   return (
     <>
       <SEO title="Admin" path="/admin" noIndex />
       <AdminShell>
-        {/* Loading */}
         {loading && (
           <div className="flex flex-1 items-center justify-center">
             <Loader2 className="h-6 w-6 animate-spin text-ash" />
@@ -84,7 +87,7 @@ export function AdminPage() {
           </div>
         )}
 
-        {/* Signed in as owner — dashboard shell */}
+        {/* Signed in as owner — dashboard */}
         {!loading && isAdmin && user && (
           <>
             <header className="flex items-center justify-between border-b border-white/10 px-6 py-4 sm:px-10">
@@ -108,30 +111,36 @@ export function AdminPage() {
               </div>
             </header>
 
-            <main className="mx-auto w-full max-w-5xl flex-1 px-6 py-12 sm:px-10">
-              <p className="eyebrow">Dashboard</p>
-              <h1 className="mt-3 font-display text-3xl font-semibold text-chalk sm:text-4xl">
-                Welcome back.
-              </h1>
-              <p className="mt-3 max-w-xl text-sm text-mist">
-                Sign-in is working. Next I'll switch these on one at a time — leads, content, then the
-                full portfolio editor.
-              </p>
+            <main className="mx-auto w-full max-w-5xl flex-1 px-6 py-10 sm:px-10">
+              {/* Tabs */}
+              <nav className="mb-8 flex gap-1 border-b border-white/10">
+                {TABS.map((t) => {
+                  const Icon = t.icon
+                  return (
+                    <button
+                      key={t.key}
+                      onClick={() => !t.soon && setTab(t.key)}
+                      disabled={t.soon}
+                      className={cn(
+                        'relative flex items-center gap-2 px-4 py-3 text-sm transition-colors',
+                        tab === t.key ? 'text-chalk' : 'text-mist hover:text-bone',
+                        t.soon && 'cursor-not-allowed text-ash/40 hover:text-ash/40',
+                      )}
+                    >
+                      <Icon className="h-4 w-4" />
+                      {t.label}
+                      {t.soon && (
+                        <span className="text-[0.55rem] uppercase tracking-wider text-ash/60">soon</span>
+                      )}
+                      {tab === t.key && <span className="absolute inset-x-2 -bottom-px h-px bg-chalk" />}
+                    </button>
+                  )
+                })}
+              </nav>
 
-              <div className="mt-10 grid gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/5 sm:grid-cols-3">
-                {featureCards.map(({ icon: Icon, title, body }) => (
-                  <div key={title} className="flex flex-col gap-3 bg-carbon p-6">
-                    <div className="flex items-center justify-between">
-                      <Icon className="h-6 w-6 text-bone" strokeWidth={1.4} />
-                      <span className="rounded-full border border-white/10 px-2 py-0.5 text-[0.6rem] uppercase tracking-[0.15em] text-ash">
-                        Soon
-                      </span>
-                    </div>
-                    <h2 className="font-display text-lg font-semibold text-chalk">{title}</h2>
-                    <p className="text-sm text-mist">{body}</p>
-                  </div>
-                ))}
-              </div>
+              {tab === 'leads' && <LeadsPanel />}
+              {tab === 'content' && <ComingSoon label="Content editing" />}
+              {tab === 'portfolio' && <ComingSoon label="Portfolio editor" />}
 
               <Link
                 to="/"
@@ -145,5 +154,13 @@ export function AdminPage() {
         )}
       </AdminShell>
     </>
+  )
+}
+
+function ComingSoon({ label }: { label: string }) {
+  return (
+    <div className="flex flex-col items-center gap-2 rounded-xl border border-white/10 py-20 text-center">
+      <p className="text-sm text-mist">{label} — coming next.</p>
+    </div>
   )
 }
