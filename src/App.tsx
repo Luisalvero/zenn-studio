@@ -22,6 +22,7 @@ const ContactPage = lazy(() =>
 const NotFoundPage = lazy(() =>
   import('@/pages/NotFoundPage').then((m) => ({ default: m.NotFoundPage })),
 )
+const AdminPage = lazy(() => import('@/pages/AdminPage').then((m) => ({ default: m.AdminPage })))
 
 /** Minimal, on-brand fallback while a route chunk loads. */
 function RouteFallback() {
@@ -34,6 +35,8 @@ export function App() {
     <MotionConfig reducedMotion="user">
       <Suspense fallback={<RouteFallback />}>
         <Routes>
+          {/* Owner-only admin — outside the public layout (no marketing chrome) */}
+          <Route path="/admin" element={<AdminPage />} />
           <Route element={<Layout />}>
             <Route path="/" element={<HomePage />} />
             <Route path="/portfolio" element={<PortfolioPage />} />
