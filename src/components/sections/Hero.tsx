@@ -82,17 +82,6 @@ export function Hero() {
           animate="visible"
           className="flex max-w-3xl flex-col gap-8"
         >
-          <motion.span
-            variants={fadeUp}
-            className="inline-flex w-fit items-center gap-2.5 rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-xs tracking-tight text-mist backdrop-blur-sm"
-          >
-            <span className="relative flex h-1.5 w-1.5">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-ember-soft opacity-75" />
-              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-ember" />
-            </span>
-            {get('availability')}
-          </motion.span>
-
           <motion.h1 variants={fadeUp} className="text-hero font-display font-semibold text-chalk">
             {get('hero_line1')}
             <br />
