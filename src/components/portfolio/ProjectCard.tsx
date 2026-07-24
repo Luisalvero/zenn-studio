@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { motion, useSpring, useReducedMotion } from 'framer-motion'
 import { ArrowUpRight } from 'lucide-react'
 import type { Project } from '@/types'
 import { Image } from '@/components/ui/Image'
@@ -14,14 +15,19 @@ interface ProjectCardProps {
 
 /**
  * Cinematic portfolio card linking to the project's detail page.
- * If the project has a `previewVideo`, the card plays a muted, looping clip on
- * hover (YouTube-style) over the poster image. On touch devices (no hover) the
- * poster simply stays.
+ * - Muted, looping preview clip plays on hover (YouTube-style) over the poster.
+ * - Subtle mouse-driven 3D tilt on the media. Both are desktop-only and
+ *   disabled for reduced-motion users.
  */
 export function ProjectCard({ project, priority = false }: ProjectCardProps) {
   const videoRef = useRef<HTMLVideoElement>(null)
+  const mediaRef = useRef<HTMLDivElement>(null)
   const [previewing, setPreviewing] = useState(false)
+  const reduce = useReducedMotion()
   const ratio = project.orientation === 'portrait' ? '4/5' : '16/10'
+
+  const rotateX = useSpring(0, { stiffness: 150, damping: 18, mass: 0.3 })
+  const rotateY = useSpring(0, { stiffness: 150, damping: 18, mass: 0.3 })
 
   function startPreview() {
     if (!project.previewVideo) return
@@ -32,9 +38,21 @@ export function ProjectCard({ project, priority = false }: ProjectCardProps) {
     void v.play().catch(() => {})
   }
 
-  function stopPreview() {
+  function handleMove(e: React.MouseEvent<HTMLDivElement>) {
+    if (reduce) return
+    const rect = mediaRef.current?.getBoundingClientRect()
+    if (!rect) return
+    const px = (e.clientX - rect.left) / rect.width - 0.5
+    const py = (e.clientY - rect.top) / rect.height - 0.5
+    rotateY.set(px * 6)
+    rotateX.set(-py * 6)
+  }
+
+  function reset() {
     setPreviewing(false)
     videoRef.current?.pause()
+    rotateX.set(0)
+    rotateY.set(0)
   }
 
   return (
@@ -42,10 +60,15 @@ export function ProjectCard({ project, priority = false }: ProjectCardProps) {
       to={`/portfolio/${project.slug}`}
       className="group block focus-visible:outline-none"
       aria-label={`${project.title} — view project`}
-      onMouseEnter={startPreview}
-      onMouseLeave={stopPreview}
     >
-      <div className="relative overflow-hidden rounded-xl border border-white/10 transition-colors duration-500 group-hover:border-white/25">
+      <motion.div
+        ref={mediaRef}
+        onMouseEnter={startPreview}
+        onMouseMove={handleMove}
+        onMouseLeave={reset}
+        style={{ rotateX, rotateY, transformPerspective: 1000 }}
+        className="relative overflow-hidden rounded-xl border border-white/10 transition-colors duration-500 group-hover:border-white/25 [transform-style:preserve-3d]"
+      >
         <Image
           src={project.thumbnail}
           alt={project.title}
@@ -85,7 +108,7 @@ export function ProjectCard({ project, priority = false }: ProjectCardProps) {
             </Tag>
           ))}
         </div>
-      </div>
+      </motion.div>
 
       <div className="mt-5 flex flex-col gap-2">
         <div className="flex items-baseline justify-between gap-4">

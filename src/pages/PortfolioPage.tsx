@@ -7,6 +7,7 @@ import { PageHeader } from '@/components/layout/PageHeader'
 import { Section } from '@/components/ui/Section'
 import { Container } from '@/components/ui/Container'
 import { ProjectCard } from '@/components/portfolio/ProjectCard'
+import { FeaturedProjectCard } from '@/components/portfolio/FeaturedProjectCard'
 import { cn } from '@/lib/utils'
 import { fadeUp } from '@/lib/animations'
 
@@ -26,6 +27,11 @@ export function PortfolioPage() {
     () => (filter === 'All' ? projects : projects.filter((p) => p.categories.includes(filter))),
     [filter],
   )
+
+  // On "All", lead with a large featured project and grid the rest.
+  const isAll = filter === 'All'
+  const featured = isAll ? projects[0] : undefined
+  const gridProjects = isAll ? projects.slice(1) : visible
 
   return (
     <>
@@ -61,24 +67,44 @@ export function PortfolioPage() {
             ))}
           </div>
 
+          {/* Featured lead */}
+          {featured && (
+            <motion.div
+              key={featured.slug}
+              variants={fadeUp}
+              initial="hidden"
+              animate="visible"
+              className="border-b border-white/5 py-14"
+            >
+              <FeaturedProjectCard project={featured} />
+            </motion.div>
+          )}
+
           {/* Grid */}
-          <motion.div layout className="mt-12 grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
-            <AnimatePresence mode="popLayout">
-              {visible.map((project, i) => (
-                <motion.div
-                  key={project.slug}
-                  layout
-                  variants={fadeUp}
-                  initial="hidden"
-                  animate="visible"
-                  exit={{ opacity: 0, y: 12 }}
-                  transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                >
-                  <ProjectCard project={project} priority={i < 3} />
-                </motion.div>
-              ))}
-            </AnimatePresence>
-          </motion.div>
+          {gridProjects.length > 0 && (
+            <>
+              {featured && (
+                <p className="mt-12 mb-8 eyebrow">More work</p>
+              )}
+              <motion.div layout className={cn('grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3', !featured && 'mt-12')}>
+                <AnimatePresence mode="popLayout">
+                  {gridProjects.map((project, i) => (
+                    <motion.div
+                      key={project.slug}
+                      layout
+                      variants={fadeUp}
+                      initial="hidden"
+                      animate="visible"
+                      exit={{ opacity: 0, y: 12 }}
+                      transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                    >
+                      <ProjectCard project={project} priority={i < 3} />
+                    </motion.div>
+                  ))}
+                </AnimatePresence>
+              </motion.div>
+            </>
+          )}
 
           {visible.length === 0 && (
             <p className="py-16 text-center text-mist">No projects in this category yet — more coming soon.</p>
