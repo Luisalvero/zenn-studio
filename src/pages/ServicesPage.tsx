@@ -7,6 +7,7 @@ import { PageHeader } from '@/components/layout/PageHeader'
 import { Section } from '@/components/ui/Section'
 import { Container } from '@/components/ui/Container'
 import { ServiceIcon } from '@/components/ui/ServiceIcon'
+import { VideoBackground } from '@/components/ui/VideoBackground'
 import { ProcessSection } from '@/components/sections/ProcessSection'
 import { ContactCTA } from '@/components/sections/ContactCTA'
 import { fadeUp, staggerContainer, viewportOnce } from '@/lib/animations'
@@ -20,13 +21,21 @@ export function ServicesPage() {
         description="Post-production services from Zenn Studio — trailer editing, gameplay cinematics, developer logs, short films, sound design, color grading, and motion graphics. Contact for a custom quote."
       />
 
-      <PageHeader
-        eyebrow="Services"
-        title="What I can make with you"
-        description="Full post-production or a single piece of the puzzle. No pricing tiers — every project is different, so every project gets a custom quote."
-      />
+      <div className="relative overflow-hidden">
+        <VideoBackground
+          src="/images/textures/edit-timelapse.mp4"
+          poster="/images/textures/edit-timelapse.jpg"
+          attachment="absolute"
+          className="-z-10"
+        />
 
-      <Section spacing="compact" className="pt-0">
+        <PageHeader
+          eyebrow="Services"
+          title="What I can make with you"
+          description="Full post-production or a single piece of the puzzle. No pricing tiers — every project is different, so every project gets a custom quote."
+        />
+
+        <Section spacing="compact" className="pt-0">
         <Container size="wide">
           <motion.div
             variants={staggerContainer(0.08)}
@@ -71,7 +80,8 @@ export function ServicesPage() {
             ))}
           </motion.div>
         </Container>
-      </Section>
+        </Section>
+      </div>
 
       <ProcessSection />
       <ContactCTA />
