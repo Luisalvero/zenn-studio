@@ -1,0 +1,197 @@
+@import 'tailwindcss';
+
+/*
+  LA PRODUCTIONS — Design System
+  ------------------------------------------------------------------
+  A restrained, monochrome, cinematic palette. Pure black grounds the
+  experience; type sits in warm off-whites and muted greys. A single
+  ember accent exists but is used sparingly (focus rings, tiny marks).
+  Everything is tuned to feel like a boutique post-production studio.
+*/
+
+@theme {
+  /* Typography ---------------------------------------------------- */
+  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI',
+    Roboto, Helvetica, Arial, sans-serif;
+  --font-display: 'Manrope Variable', 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+
+  /* Monochrome scale (dark-first) --------------------------------- */
+  --color-void: #000000; /* page background            */
+  --color-ink: #060607; /* deepest surface             */
+  --color-carbon: #0b0b0d; /* raised surface           */
+  --color-graphite: #121214; /* cards                  */
+  --color-steel: #1b1b1f; /* raised cards / hovers     */
+  --color-iron: #2a2a30; /* borders (strong)          */
+  --color-ash: #71717a; /* muted / captions          */
+  --color-mist: #a1a1aa; /* secondary text            */
+  --color-silver: #d4d4d8; /* body text               */
+  --color-bone: #ededf0; /* primary text              */
+  --color-chalk: #ffffff; /* headlines / pure white   */
+
+  /* Ember accent — use with intention, almost never as fill ------- */
+  --color-ember: #c34a3e;
+  --color-ember-soft: #d9695d;
+
+  /* Motion -------------------------------------------------------- */
+  --ease-cinematic: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --animate-marquee: marquee 46s linear infinite;
+  --animate-grain: grain 8s steps(10) infinite;
+
+  /* Container ----------------------------------------------------- */
+  --breakpoint-3xl: 1920px;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes grain {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  10% {
+    transform: translate(-4%, -2%);
+  }
+  30% {
+    transform: translate(2%, -6%);
+  }
+  50% {
+    transform: translate(-2%, 4%);
+  }
+  70% {
+    transform: translate(6%, 2%);
+  }
+  90% {
+    transform: translate(-4%, 4%);
+  }
+}
+
+@layer base {
+  :root {
+    color-scheme: dark;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  html,
+  body {
+    background-color: var(--color-void);
+    color: var(--color-silver);
+  }
+
+  body {
+    font-family: var(--font-sans);
+    font-feature-settings: 'ss01', 'cv01', 'cv11';
+    overflow-x: hidden;
+    min-height: 100dvh;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    color: var(--color-chalk);
+    text-wrap: balance;
+    letter-spacing: -0.02em;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background: var(--color-bone);
+    color: var(--color-void);
+  }
+
+  /* Cinematic focus ring — visible but never garish */
+  :focus-visible {
+    outline: 2px solid var(--color-ember-soft);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* Custom scrollbar (desktop) */
+  @media (pointer: fine) {
+    * {
+      scrollbar-width: thin;
+      scrollbar-color: var(--color-iron) transparent;
+    }
+    *::-webkit-scrollbar {
+      width: 10px;
+      height: 10px;
+    }
+    *::-webkit-scrollbar-thumb {
+      background: var(--color-iron);
+      border-radius: 999px;
+      border: 3px solid var(--color-void);
+    }
+  }
+
+  /* Respect users who prefer less motion */
+  @media (prefers-reduced-motion: reduce) {
+    :root {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+    }
+  }
+}
+
+@layer utilities {
+  /* Fluid, tightly-tracked display type used for big statements */
+  .text-hero {
+    font-size: clamp(2.75rem, 8vw, 7.5rem);
+    line-height: 0.98;
+    letter-spacing: -0.03em;
+  }
+
+  .text-display {
+    font-size: clamp(2rem, 5vw, 4rem);
+    line-height: 1.02;
+    letter-spacing: -0.025em;
+  }
+
+  /* Small, wide, uppercase label — the studio "eyebrow" */
+  .eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--color-ash);
+    font-weight: 500;
+  }
+
+  /* Edge-to-edge fades used to bleed sections into black */
+  .mask-fade-b {
+    -webkit-mask-image: linear-gradient(to bottom, #000 60%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 60%, transparent 100%);
+  }
+
+  .bg-grid {
+    background-image:
+      linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    background-size: 64px 64px;
+  }
+
+  /* Thin hairline used to separate sections without a hard border */
+  .hairline {
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+}

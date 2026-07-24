@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>LA Productions</title>
+    <meta name="robots" content="noindex" />
+    <!--
+      GitHub Pages SPA fallback (rafgraph/spa-github-pages).
+      GitHub Pages serves this file for any unknown path. It encodes the
+      requested path into a query string and redirects to the root, where the
+      snippet in index.html decodes it and hands control to React Router.
+      pathSegmentsToKeep = 0 because the site is served from the domain root.
+    -->
+    <script type="text/javascript">
+      var pathSegmentsToKeep = 0
+      var l = window.location
+      l.replace(
+        l.protocol +
+          '//' +
+          l.hostname +
+          (l.port ? ':' + l.port : '') +
+          l.pathname
+            .split('/')
+            .slice(0, 1 + pathSegmentsToKeep)
+            .join('/') +
+          '/?/' +
+          l.pathname
+            .slice(1)
+            .split('/')
+            .slice(pathSegmentsToKeep)
+            .join('/')
+            .replace(/&/g, '~and~') +
+          (l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') +
+          l.hash
+      )
+    </script>
+  </head>
+  <body></body>
+</html>

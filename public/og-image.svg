@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <!--
+    Placeholder social-share card. Export a 1200x630 JPG/PNG named
+    og-image.jpg into /public for best cross-platform support (many
+    social scrapers do not render SVG). This SVG is the design reference.
+  -->
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="42%" r="65%">
+      <stop offset="0%" stop-color="#141416" />
+      <stop offset="100%" stop-color="#000000" />
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#glow)" />
+  <rect x="40" y="40" width="1120" height="550" fill="none" stroke="#2a2a30" stroke-width="1.5" />
+  <text x="600" y="300" text-anchor="middle" fill="#ffffff"
+        font-family="Manrope, Inter, Arial, sans-serif" font-size="96" font-weight="700"
+        letter-spacing="8">LA PRODUCTIONS</text>
+  <text x="600" y="360" text-anchor="middle" fill="#a1a1aa"
+        font-family="Inter, Arial, sans-serif" font-size="30" letter-spacing="6">
+    CINEMATIC EDITING · SOUND · COLOR
+  </text>
+</svg>
