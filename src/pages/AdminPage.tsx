@@ -5,6 +5,7 @@ import { SEO } from '@/components/ui/SEO'
 import { GoogleIcon } from '@/components/ui/BrandIcons'
 import { LeadsPanel } from '@/components/admin/LeadsPanel'
 import { ContentPanel } from '@/components/admin/ContentPanel'
+import { PortfolioPanel } from '@/components/admin/PortfolioPanel'
 import { useAuth } from '@/hooks/useAuth'
 import { ADMIN_EMAIL } from '@/lib/supabase'
 import { cn } from '@/lib/utils'
@@ -23,7 +24,7 @@ type Tab = 'leads' | 'content' | 'portfolio'
 const TABS = [
   { key: 'leads', label: 'Leads', icon: Inbox, soon: false },
   { key: 'content', label: 'Content', icon: SlidersHorizontal, soon: false },
-  { key: 'portfolio', label: 'Portfolio', icon: Film, soon: true },
+  { key: 'portfolio', label: 'Portfolio', icon: Film, soon: false },
 ] as const
 
 export function AdminPage() {
@@ -141,7 +142,7 @@ export function AdminPage() {
 
               {tab === 'leads' && <LeadsPanel />}
               {tab === 'content' && <ContentPanel />}
-              {tab === 'portfolio' && <ComingSoon label="Portfolio editor" />}
+              {tab === 'portfolio' && <PortfolioPanel />}
 
               <Link
                 to="/"
@@ -155,13 +156,5 @@ export function AdminPage() {
         )}
       </AdminShell>
     </>
-  )
-}
-
-function ComingSoon({ label }: { label: string }) {
-  return (
-    <div className="flex flex-col items-center gap-2 rounded-xl border border-white/10 py-20 text-center">
-      <p className="text-sm text-mist">{label} — coming next.</p>
-    </div>
   )
 }

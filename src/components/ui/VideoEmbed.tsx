@@ -28,14 +28,25 @@ export function VideoEmbed({ provider, id, title = 'Video', className, orientati
       )}
     >
       {hasVideo ? (
-        <iframe
-          className="absolute inset-0 h-full w-full"
-          src={embedUrl(provider, id)}
-          title={title}
-          loading="lazy"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-        />
+        provider === 'file' ? (
+          <video
+            className="absolute inset-0 h-full w-full bg-black"
+            src={id}
+            title={title}
+            controls
+            playsInline
+            preload="metadata"
+          />
+        ) : (
+          <iframe
+            className="absolute inset-0 h-full w-full"
+            src={embedUrl(provider, id)}
+            title={title}
+            loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          />
+        )
       ) : (
         <div className="bg-grid absolute inset-0 flex flex-col items-center justify-center gap-4 bg-gradient-to-br from-[#0d0d0f] to-[#050506] text-center">
           <span className="flex h-16 w-16 items-center justify-center rounded-full border border-white/15 text-bone">

@@ -17,8 +17,8 @@ export type ProjectCategory =
   | 'Horror'
 
 export interface VideoEmbed {
-  provider: 'youtube' | 'vimeo' | 'drive'
-  /** The video ID only, not the full URL. Leave empty to show a placeholder. */
+  provider: 'youtube' | 'vimeo' | 'drive' | 'file'
+  /** Video ID (youtube/vimeo/drive) or a direct file URL ('file'). Empty → placeholder. */
   id: string
 }
 

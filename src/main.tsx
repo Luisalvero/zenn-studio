@@ -9,12 +9,15 @@ import './index.css'
 
 import { App } from './App'
 import { ContentProvider } from './lib/content'
+import { ProjectsProvider } from './lib/projects-store'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
       <ContentProvider>
-        <App />
+        <ProjectsProvider>
+          <App />
+        </ProjectsProvider>
       </ContentProvider>
     </BrowserRouter>
   </StrictMode>,

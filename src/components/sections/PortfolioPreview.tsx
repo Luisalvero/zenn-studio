@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { ArrowUpRight } from 'lucide-react'
-import { featuredProjects } from '@/data/projects'
+import { useProjects } from '@/lib/projects-store'
 import { Section } from '@/components/ui/Section'
 import { Container } from '@/components/ui/Container'
 import { SectionHeading } from '@/components/ui/SectionHeading'
@@ -10,6 +10,8 @@ import { fadeUp, staggerContainer, viewportOnce } from '@/lib/animations'
 
 /** Homepage preview of selected personal projects. */
 export function PortfolioPreview() {
+  const { projects } = useProjects()
+  const featured = projects.filter((p) => p.featured)
   return (
     <Section id="work" aria-label="Selected work">
       <Container size="wide">
@@ -33,7 +35,7 @@ export function PortfolioPreview() {
           viewport={viewportOnce}
           className="mt-14 grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3"
         >
-          {featuredProjects.map((project, i) => (
+          {featured.map((project, i) => (
             <motion.div key={project.slug} variants={fadeUp}>
               <ProjectCard project={project} priority={i < 2} />
             </motion.div>

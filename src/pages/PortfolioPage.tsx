@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { projects } from '@/data/projects'
+import { useProjects } from '@/lib/projects-store'
 import type { ProjectCategory } from '@/types'
 import { SEO } from '@/components/ui/SEO'
 import { PageHeader } from '@/components/layout/PageHeader'
@@ -15,17 +15,18 @@ type Filter = 'All' | ProjectCategory
 
 export function PortfolioPage() {
   const [filter, setFilter] = useState<Filter>('All')
+  const { projects } = useProjects()
 
   // Unique categories, in first-seen order, for the filter bar.
   const filters = useMemo<Filter[]>(() => {
     const set = new Set<ProjectCategory>()
     projects.forEach((p) => p.categories.forEach((c) => set.add(c)))
     return ['All', ...Array.from(set)]
-  }, [])
+  }, [projects])
 
   const visible = useMemo(
     () => (filter === 'All' ? projects : projects.filter((p) => p.categories.includes(filter))),
-    [filter],
+    [filter, projects],
   )
 
   // On "All", lead with a large featured project and grid the rest.

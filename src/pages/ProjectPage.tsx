@@ -2,7 +2,7 @@ import type { ReactNode } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { ArrowLeft, ArrowRight, ArrowUpRight, Check } from 'lucide-react'
-import { getProjectBySlug, getAdjacentProjects } from '@/data/projects'
+import { useProjects, getBySlug, getAdjacent } from '@/lib/projects-store'
 import { SEO } from '@/components/ui/SEO'
 import { Container } from '@/components/ui/Container'
 import { Section } from '@/components/ui/Section'
@@ -30,26 +30,33 @@ function Block({ label, title, children }: { label: string; title?: string; chil
 
 export function ProjectPage() {
   const { slug } = useParams<{ slug: string }>()
-  const project = slug ? getProjectBySlug(slug) : undefined
+  const { projects, loading } = useProjects()
+  const project = slug ? getBySlug(projects, slug) : undefined
 
   if (!project) {
     return (
       <>
-        <SEO title="Project not found" path="/portfolio" noIndex />
+        <SEO title={loading ? 'Loading' : 'Project not found'} path="/portfolio" noIndex />
         <Section className="pt-40">
           <Container className="flex flex-col items-start gap-6">
-            <h1 className="font-display text-4xl font-semibold text-chalk">Project not found</h1>
-            <p className="text-mist">That project doesn't exist — it may have moved.</p>
-            <Button to="/portfolio" variant="secondary" iconLeft={<ArrowLeft className="h-4 w-4" />}>
-              Back to portfolio
-            </Button>
+            {loading ? (
+              <p className="text-mist">Loading…</p>
+            ) : (
+              <>
+                <h1 className="font-display text-4xl font-semibold text-chalk">Project not found</h1>
+                <p className="text-mist">That project doesn't exist — it may have moved.</p>
+                <Button to="/portfolio" variant="secondary" iconLeft={<ArrowLeft className="h-4 w-4" />}>
+                  Back to portfolio
+                </Button>
+              </>
+            )}
           </Container>
         </Section>
       </>
     )
   }
 
-  const { prev, next } = getAdjacentProjects(project.slug)
+  const { prev, next } = getAdjacent(projects, project.slug)
   const isPortrait = project.orientation === 'portrait'
   const hasNotes = Boolean(project.soundNotes || project.motionNotes || project.gradeNotes)
   const hasSidebar = Boolean(project.software?.length || project.techniques?.length)
