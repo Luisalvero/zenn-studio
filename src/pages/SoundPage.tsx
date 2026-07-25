@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Play, Pause, SkipBack, SkipForward, Music2, AudioLines } from 'lucide-react'
-import { soundPlaylists, type SoundPlaylist, type SoundTrack } from '@/data/sound'
+import { type SoundPlaylist, type SoundTrack } from '@/data/sound'
+import { useSound } from '@/lib/sound-store'
 import { SEO } from '@/components/ui/SEO'
 import { PageHeader } from '@/components/layout/PageHeader'
 import { Section } from '@/components/ui/Section'
@@ -28,14 +29,16 @@ function fmt(sec: number) {
 }
 
 export function SoundPage() {
-  const [playlist, setPlaylist] = useState<SoundPlaylist>(soundPlaylists[0])
+  const { playlists, loading } = useSound()
+  const [playlistId, setPlaylistId] = useState<string | null>(null)
   const [currentId, setCurrentId] = useState<string | null>(null)
   const [playing, setPlaying] = useState(false)
   const [progress, setProgress] = useState(0)
   const [duration, setDuration] = useState(0)
   const audioRef = useRef<HTMLAudioElement>(null)
 
-  const allTracks = soundPlaylists.flatMap((p) => p.tracks)
+  const playlist: SoundPlaylist = playlists.find((p) => p.id === playlistId) ?? playlists[0]
+  const allTracks = playlists.flatMap((p) => p.tracks)
   const current = allTracks.find((t) => t.id === currentId) || null
 
   useEffect(() => {
@@ -77,6 +80,28 @@ export function SoundPage() {
     }
   }
 
+  if (loading || !playlist) {
+    return (
+      <>
+        <SEO
+          title="Sound"
+          path="/sound"
+          description="Sound design by Zenn Studio — impacts, atmospheres, whooshes, and foley, organised into playlists."
+        />
+        <PageHeader
+          eyebrow="Sound Design"
+          title="A library, not a list."
+          description="Sound design work — impacts, atmospheres, transitions, and foley — organised into playlists. Press play."
+        />
+        <Section spacing="compact" className="pt-0 pb-40">
+          <Container size="wide">
+            <p className="py-16 text-sm text-ash">{loading ? 'Loading…' : 'No tracks yet.'}</p>
+          </Container>
+        </Section>
+      </>
+    )
+  }
+
   return (
     <>
       <SEO
@@ -104,10 +129,10 @@ export function SoundPage() {
         <Container size="wide">
           {/* Playlist picker */}
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-            {soundPlaylists.map((p) => (
+            {playlists.map((p) => (
               <button
                 key={p.id}
-                onClick={() => setPlaylist(p)}
+                onClick={() => setPlaylistId(p.id)}
                 className={cn(
                   'group flex items-center gap-3 rounded-lg border p-3 text-left transition-colors',
                   playlist.id === p.id

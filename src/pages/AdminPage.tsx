@@ -1,11 +1,12 @@
 import { useState, type ReactNode } from 'react'
 import { Link } from 'react-router-dom'
-import { Loader2, LogOut, Inbox, SlidersHorizontal, Film, ArrowLeft, ShieldAlert } from 'lucide-react'
+import { Loader2, LogOut, Inbox, SlidersHorizontal, Film, Music2, ArrowLeft, ShieldAlert } from 'lucide-react'
 import { SEO } from '@/components/ui/SEO'
 import { GoogleIcon } from '@/components/ui/BrandIcons'
 import { LeadsPanel } from '@/components/admin/LeadsPanel'
 import { ContentPanel } from '@/components/admin/ContentPanel'
 import { PortfolioPanel } from '@/components/admin/PortfolioPanel'
+import { SoundPanel } from '@/components/admin/SoundPanel'
 import { useAuth } from '@/hooks/useAuth'
 import { ADMIN_EMAIL } from '@/lib/supabase'
 import { cn } from '@/lib/utils'
@@ -20,29 +21,33 @@ function AdminShell({ children }: { children: ReactNode }) {
   )
 }
 
-type Tab = 'leads' | 'content' | 'portfolio'
+type Tab = 'leads' | 'content' | 'portfolio' | 'sound'
 const TABS = [
   { key: 'leads', label: 'Leads', icon: Inbox, soon: false },
   { key: 'content', label: 'Content', icon: SlidersHorizontal, soon: false },
   { key: 'portfolio', label: 'Portfolio', icon: Film, soon: false },
+  { key: 'sound', label: 'Sound', icon: Music2, soon: false },
 ] as const
 
 export function AdminPage() {
   const { user, loading, isAdmin, signIn, signOut } = useAuth()
   const [tab, setTab] = useState<Tab>('leads')
+  // Local dev: skip the Google login entirely (the Sound editor writes to a
+  // local file, so no auth is needed on localhost). Production stays locked.
+  const bypass = import.meta.env.DEV
 
   return (
     <>
       <SEO title="Admin" path="/admin" noIndex />
       <AdminShell>
-        {loading && (
+        {loading && !bypass && (
           <div className="flex flex-1 items-center justify-center">
             <Loader2 className="h-6 w-6 animate-spin text-ash" />
           </div>
         )}
 
         {/* Signed out — login */}
-        {!loading && !user && (
+        {!loading && !user && !bypass && (
           <div className="flex flex-1 items-center justify-center px-6">
             <div className="w-full max-w-sm rounded-2xl border border-white/10 bg-carbon p-8 text-center">
               <span className="mx-auto mb-6 flex h-11 w-11 items-center justify-center rounded-md border border-white/15 bg-white/[0.02]">
@@ -69,7 +74,7 @@ export function AdminPage() {
         )}
 
         {/* Signed in but not the owner */}
-        {!loading && user && !isAdmin && (
+        {!loading && user && !isAdmin && !bypass && (
           <div className="flex flex-1 items-center justify-center px-6">
             <div className="w-full max-w-sm rounded-2xl border border-white/10 bg-carbon p-8 text-center">
               <ShieldAlert className="mx-auto h-8 w-8 text-ember-soft" strokeWidth={1.5} />
@@ -89,8 +94,8 @@ export function AdminPage() {
           </div>
         )}
 
-        {/* Signed in as owner — dashboard */}
-        {!loading && isAdmin && user && (
+        {/* Signed in as owner — dashboard (or local dev bypass) */}
+        {(bypass || (!loading && isAdmin && user)) && (
           <>
             <header className="flex items-center justify-between border-b border-white/10 px-6 py-4 sm:px-10">
               <div className="flex items-center gap-3">
@@ -102,7 +107,7 @@ export function AdminPage() {
                 </span>
               </div>
               <div className="flex items-center gap-4">
-                <span className="hidden text-xs text-ash sm:inline">{user.email}</span>
+                <span className="hidden text-xs text-ash sm:inline">{user?.email ?? 'Local dev (no login)'}</span>
                 <button
                   onClick={() => signOut()}
                   className="inline-flex items-center gap-2 rounded-full border border-white/15 px-4 py-2 text-xs text-bone transition-colors hover:bg-white/5"
@@ -143,6 +148,7 @@ export function AdminPage() {
               {tab === 'leads' && <LeadsPanel />}
               {tab === 'content' && <ContentPanel />}
               {tab === 'portfolio' && <PortfolioPanel />}
+              {tab === 'sound' && <SoundPanel />}
 
               <Link
                 to="/"

@@ -1,0 +1,668 @@
+[
+  {
+    "id": "140-f-major-funkystyleyeaaah",
+    "title": "Funky Breakbeat",
+    "description": "Jazz-tinged breakbeat with a soulful piano lead over a groovy bassline and crisp drums, upbeat and energetic. It would lift a vibrant city scene or a stylish montage.",
+    "url": "/audio/140-f-major-funkystyleyeaaah.mp3",
+    "duration": "1:50",
+    "playlist": "beats-instrumentals",
+    "sort_order": 1
+  },
+  {
+    "id": "160-bpm-e-min-pergatory-prod-3choed",
+    "title": "Purgatory",
+    "description": " acoustic guitar over a tense synth bass, dark and quietly menacing with a mix modern trap and hoodtrap elements",
+    "url": "/audio/160-bpm-e-min-pergatory-prod-3choed.mp3",
+    "duration": "1:42",
+    "playlist": "beats-instrumentals",
+    "sort_order": 2
+  },
+  {
+    "id": "140-bpm-f-min-weewoo-prod-3choed",
+    "title": "Weewoo",
+    "description": "A moody instrumental blending jazzy keys with darker, tense textures over an uneasy groove. ",
+    "url": "/audio/140-bpm-f-min-weewoo-prod-3choed.mp3",
+    "duration": "1:28",
+    "playlist": "beats-instrumentals",
+    "sort_order": 3
+  },
+  {
+    "id": "acid-undis",
+    "title": "Acid Trip",
+    "description": "An electronic dance piece with a techno pulse, a synth-heavy melody and driving bass building a euphoric lift. It would suit a nightclub scene or a high-energy montage.",
+    "url": "/audio/acid-undis.mp3",
+    "duration": "2:26",
+    "playlist": "beats-instrumentals",
+    "sort_order": 4
+  },
+  {
+    "id": "aurafarmingpremium",
+    "title": "Aura",
+    "description": "A high-energy build with cinematic synths, heavy bass, and punchy synth drums, euphoric and widescreen. It would power a futuristic cityscape or a high-action sequence.",
+    "url": "/audio/aurafarmingpremium.mp3",
+    "duration": "2:48",
+    "playlist": "beats-instrumentals",
+    "sort_order": 5
+  },
+  {
+    "id": "aggrivated",
+    "title": "Aggravated",
+    "description": "A glitchy hip-hop instrumental with heavy bass and edgy synth lines over a tense, eerie backdrop.",
+    "url": "/audio/aggrivated.mp3",
+    "duration": "1:28",
+    "playlist": "vocals-voice",
+    "sort_order": 6
+  },
+  {
+    "id": "crazy-rage-145-dmin",
+    "title": "Crazy Rage",
+    "description": "A glitchy electro-funk instrumental in D minor, a gritty synth bass over funky electronic drums, experimental but danceable.",
+    "url": "/audio/crazy-rage-145-dmin.mp3",
+    "duration": "2:07",
+    "playlist": "beats-instrumentals",
+    "sort_order": 7
+  },
+  {
+    "id": "aisufhliaunvlkjaenfliusahdlkjfb-done",
+    "title": "Love Me",
+    "description": "A dreamy electro-pop instrumental, a haunting piano line over a synth-driven beat, uplifting and ethereal. using mylacore elements to highten bass",
+    "url": "/audio/aisufhliaunvlkjaenfliusahdlkjfb-done.mp3",
+    "duration": "2:28",
+    "playlist": "vocals-voice",
+    "sort_order": 8
+  },
+  {
+    "id": "phonkaura",
+    "title": "Phonk Aura",
+    "description": "A hard-hitting electro/phonk instrumental, heavy bass and aggressive drums building an intense, driving atmosphere.",
+    "url": "/audio/phonkaura.mp3",
+    "duration": "2:22",
+    "playlist": "vocals-voice",
+    "sort_order": 9
+  },
+  {
+    "id": "second-acid-undistorted",
+    "title": "Second Acid",
+    "description": "A driving, synth-forward cut with heavy bass and distorted guitar bite, echoing classic sci-fi scores.",
+    "url": "/audio/second-acid-undistorted.mp3",
+    "duration": "3:30",
+    "playlist": "vocals-voice",
+    "sort_order": 10
+  },
+  {
+    "id": "steven-d4dic",
+    "title": "I'm Afraid",
+    "description": "A reverb-drenched guitar with indie band elements",
+    "url": "/audio/steven-d4dic.mp3",
+    "duration": "2:12",
+    "playlist": "ambient-chill",
+    "sort_order": 11
+  },
+  {
+    "id": "savemytears",
+    "title": "Save My Tears",
+    "description": "A futuristic electro-pop instrumental with a glitchy edge and tense energy, synth lead and electronic drums driving hard.",
+    "url": "/audio/savemytears.mp3",
+    "duration": "2:53",
+    "playlist": "beats-instrumentals",
+    "sort_order": 12
+  },
+  {
+    "id": "signoftheend",
+    "title": "Sign of the End",
+    "description": "An eerie instrumental with a haunting synth melody over electronic pads, mysterious and cinematic. ",
+    "url": "/audio/signoftheend.mp3",
+    "duration": "3:12",
+    "playlist": "vocals-voice",
+    "sort_order": 13
+  },
+  {
+    "id": "glowinginwhite",
+    "title": "Glowing in White",
+    "description": "A haunting electronic piece with a suspenseful edge, synth, piano, and drums.",
+    "url": "/audio/glowinginwhite.mp3",
+    "duration": "2:51",
+    "playlist": "vocals-voice",
+    "sort_order": 14
+  },
+  {
+    "id": "iwannabefree",
+    "title": "I Wanna Be Free",
+    "description": "A electronic track with, cinematic atmosphere, synth, piano, and drums building tension.",
+    "url": "/audio/iwannabefree.mp3",
+    "duration": "2:44",
+    "playlist": "vocals-voice",
+    "sort_order": 15
+  },
+  {
+    "id": "losindios",
+    "title": "Los Indios",
+    "description": "A world-beat groove driven by organic hand percussion and ethnic drums, earthy and rhythmic mixed in with heavy electronic rage trap",
+    "url": "/audio/losindios.mp3",
+    "duration": "2:20",
+    "playlist": "beats-instrumentals",
+    "sort_order": 16
+  },
+  {
+    "id": "tueresproblemas",
+    "title": "Tu Eres Problemas",
+    "description": "A dreamy R&B instrumental, a soothing piano line over a groovy bassline and electronic beats, relaxed and warm.",
+    "url": "/audio/tueresproblemas.mp3",
+    "duration": "2:05",
+    "playlist": "vocals-voice",
+    "sort_order": 17
+  },
+  {
+    "id": "vocalcoverthingy",
+    "title": "E-Minor Omen",
+    "description": "A dark, ominous electronic cut leaning toward expiremental sound design",
+    "url": "/audio/vocalcoverthingy.mp3",
+    "duration": "3:04",
+    "playlist": "sound-design-fx",
+    "sort_order": 18
+  },
+  {
+    "id": "amalgamation",
+    "title": "Amalgamation",
+    "description": "An electronic track with jungle influences that builds a dark, eerie atmosphere. It suits a tense horror scene or a shadowy late-night set.",
+    "url": "/audio/amalgamation.mp3",
+    "duration": "2:07",
+    "playlist": "beats-instrumentals",
+    "sort_order": 19
+  },
+  {
+    "id": "beest-house-i-ve-made",
+    "title": "La La Land",
+    "description": "A dreamy House cut in D# minor with a wistful, cinematic chord progression. ",
+    "url": "/audio/beest-house-i-ve-made.mp3",
+    "duration": "2:02",
+    "playlist": "beats-instrumentals",
+    "sort_order": 20
+  },
+  {
+    "id": "crazydrill",
+    "title": "Crazy Drill",
+    "description": "a modern drill take with underground elements",
+    "url": "/audio/crazydrill.mp3",
+    "duration": "2:06",
+    "playlist": "beats-instrumentals",
+    "sort_order": 21
+  },
+  {
+    "id": "ethnic-kankan",
+    "title": "Kankan",
+    "description": "An eerie, suspenseful beat pairing Eastern-flavored instrumentation with modern trap drums. It would suit a tense game level or a dramatic action scene.",
+    "url": "/audio/ethnic-kankan.mp3",
+    "duration": "2:00",
+    "playlist": "beats-instrumentals",
+    "sort_order": 22
+  },
+  {
+    "id": "firstopiumbeat",
+    "title": "First Opium",
+    "description": "A glitchy, dream-like beat with atmospheric synths, heavy bass, and sparse drums, dark and introspective.",
+    "url": "/audio/firstopiumbeat.mp3",
+    "duration": "1:53",
+    "playlist": "beats-instrumentals",
+    "sort_order": 23
+  },
+  {
+    "id": "letmeout",
+    "title": "Let Me Out",
+    "description": "A synthwave instrumental with a haunting violin lead over synth pads and electronic drums, a slow build into something driving. ",
+    "url": "/audio/letmeout.mp3",
+    "duration": "2:43",
+    "playlist": "beats-instrumentals",
+    "sort_order": 24
+  },
+  {
+    "id": "rebelbeat-130-d-min",
+    "title": "Rebel",
+    "description": "A moody, heavy trap instrumental at a slow tempo, synths, deep bass, and hard drums in D# minor.",
+    "url": "/audio/rebelbeat-130-d-min.mp3",
+    "duration": "2:15",
+    "playlist": "beats-instrumentals",
+    "sort_order": 25
+  },
+  {
+    "id": "sexy-drill",
+    "title": "So Fine",
+    "description": "A modern hip-hop and drill instrumental with a deep, dark mood, bass and drums up front, synth and piano adding texture.",
+    "url": "/audio/sexy-drill.mp3",
+    "duration": "2:09",
+    "playlist": "vocals-voice",
+    "sort_order": 26
+  },
+  {
+    "id": "songepic",
+    "title": "Epic",
+    "description": "A dreamy synthwave cut with a haunting violin lead over synth pads and electronic drums, mysterious and suspenseful. It would suit a thriller scene or a noir game.",
+    "url": "/audio/songepic.mp3",
+    "duration": "2:14",
+    "playlist": "beats-instrumentals",
+    "sort_order": 27
+  },
+  {
+    "id": "108-d-maj",
+    "title": "Sunlit Piano",
+    "description": "A serene solo-piano melody in D major with a soft, ambient glow. It would sit comfortably under a reflective scene, a meditation app, or a calm spa moment.",
+    "url": "/audio/108-d-maj.mp3",
+    "duration": "2:49",
+    "playlist": "ambient-chill",
+    "sort_order": 28
+  },
+  {
+    "id": "115-gmin",
+    "title": "Moonlight",
+    "description": "Heavy dark RNB track with ambience and heavy drums",
+    "url": "/audio/115-gmin.mp3",
+    "duration": "2:19",
+    "playlist": "beats-instrumentals",
+    "sort_order": 29
+  },
+  {
+    "id": "127-d-min",
+    "title": "Drift in D Minor",
+    "description": "A mellow synthwave instrumental in D minor, soft chord progressions and a calm, floating atmosphere. It would underscore a nocturnal cityscape or a contemplative sci-fi beat.",
+    "url": "/audio/127-d-min.mp3",
+    "duration": "2:51",
+    "playlist": "beats-instrumentals",
+    "sort_order": 30
+  },
+  {
+    "id": "120-reaggeaton-d-min",
+    "title": "Distant Planet",
+    "description": "Flowing synth melodies over a chilled-out beat, building an ethereal, weightless atmosphere.",
+    "url": "/audio/120-reaggeaton-d-min.mp3",
+    "duration": "2:14",
+    "playlist": "ambient-chill",
+    "sort_order": 31
+  },
+  {
+    "id": "crazyinterlude",
+    "title": "Interlude",
+    "description": "A dreamy interlude, soft flowing synths and gentle melodies that feel calm and otherworldly.",
+    "url": "/audio/crazyinterlude.mp3",
+    "duration": "1:46",
+    "playlist": "ambient-chill",
+    "sort_order": 32
+  },
+  {
+    "id": "don-t-call-it-love-mixe",
+    "title": "Don't Call It Love",
+    "description": "A laid-back indie-pop instrumental, soothing acoustic guitar over a gentle synth backdrop, mellow and unhurried.",
+    "url": "/audio/don-t-call-it-love-mixe.mp3",
+    "duration": "3:41",
+    "playlist": "vocals-voice",
+    "sort_order": 33
+  },
+  {
+    "id": "im-not-the-man-170bpm",
+    "title": "I'm Not the Man",
+    "description": "A poignant piano piece in Db major, tender, reflective, and emotionally direct WITH HEAVY BASS",
+    "url": "/audio/im-not-the-man-170bpm.mp3",
+    "duration": "2:30",
+    "playlist": "vocals-voice",
+    "sort_order": 34
+  },
+  {
+    "id": "jazzplug-d-min-95",
+    "title": "After Hours",
+    "description": "Soft piano jazz chords under a smooth soprano-sax lead, mellow and easygoing at 95 BPM in D minor. ",
+    "url": "/audio/jazzplug-d-min-95.mp3",
+    "duration": "1:50",
+    "playlist": "ambient-chill",
+    "sort_order": 35
+  },
+  {
+    "id": "dahlonega",
+    "title": "Dahlonega",
+    "description": "A serene solo acoustic-guitar piece, a soft, dreamy melody, gentle and unhurried. It would suit a meditation video or a quiet, reflective scene.",
+    "url": "/audio/dahlonega.mp3",
+    "duration": "3:08",
+    "playlist": "vocals-voice",
+    "sort_order": 36
+  },
+  {
+    "id": "fly-with-me-final",
+    "title": "Fly With Me",
+    "description": "A dreamy electro-pop instrumental, a haunting piano melody over a synth backdrop, gently melancholic.",
+    "url": "/audio/fly-with-me-final.mp3",
+    "duration": "2:28",
+    "playlist": "vocals-voice",
+    "sort_order": 37
+  },
+  {
+    "id": "helpme",
+    "title": "KJUO:",
+    "description": "Let your imagination grow",
+    "url": "/audio/helpme.mp3",
+    "duration": "1:14",
+    "playlist": "sound-design-fx",
+    "sort_order": 38
+  },
+  {
+    "id": "lmao",
+    "title": "Fright drill",
+    "description": "Light, airy synth pads and soft violin melodies evoke calm and quiet wonder.",
+    "url": "/audio/lmao.mp3",
+    "duration": "2:11",
+    "playlist": "beats-instrumentals",
+    "sort_order": 39
+  },
+  {
+    "id": "morernb-new",
+    "title": "Lullaby",
+    "description": "Warm, soothing piano chords build a calming, sleepy atmosphere with simple percussion.",
+    "url": "/audio/morernb-new.mp3",
+    "duration": "3:50",
+    "playlist": "ambient-chill",
+    "sort_order": 40
+  },
+  {
+    "id": "newambience",
+    "title": "New Ambience",
+    "description": "A dreamy instrumental, a soothing melody over a chilled electronic beat. Easy and warm.",
+    "url": "/audio/newambience.mp3",
+    "duration": "1:28",
+    "playlist": "ambient-chill",
+    "sort_order": 41
+  },
+  {
+    "id": "something-inside-of-me",
+    "title": "Something Inside",
+    "description": "A tranquil soundscape of gentle synths, harp, and soft vocal textures. Calm and weightless.",
+    "url": "/audio/something-inside-of-me.mp3",
+    "duration": "2:29",
+    "playlist": "ambient-chill",
+    "sort_order": 42
+  },
+  {
+    "id": "you-know-what-i-want",
+    "title": "You Know What I Want",
+    "description": "A  hip-hop cut with a soulful, groovy beat and an intense atmosphere",
+    "url": "/audio/you-know-what-i-want.mp3",
+    "duration": "3:13",
+    "playlist": "vocals-voice",
+    "sort_order": 43
+  },
+  {
+    "id": "replay-hoodtrap-3choed",
+    "title": "Replay",
+    "description": "A soulful remix what can I say",
+    "url": "/audio/replay-hoodtrap-3choed.mp3",
+    "duration": "1:55",
+    "playlist": "remixes-covers",
+    "sort_order": 44
+  },
+  {
+    "id": "mylancore-lyrics-mixed",
+    "title": "Mylancore",
+    "description": "An intense Mylancore song with intense atmosphere",
+    "url": "/audio/mylancore-lyrics-mixed.mp3",
+    "duration": "2:58",
+    "playlist": "vocals-voice",
+    "sort_order": 45
+  },
+  {
+    "id": "afrohouseambient",
+    "title": "Afrohouse",
+    "description": "A soulful female vocal drifting over a dreamy, downtempo blend of R&B and electronic textures.",
+    "url": "/audio/afrohouseambient.mp3",
+    "duration": "2:36",
+    "playlist": "beats-instrumentals",
+    "sort_order": 46
+  },
+  {
+    "id": "meldocibirdsong",
+    "title": "Birdsong",
+    "description": " Laid-back reflective and chill interlude",
+    "url": "/audio/meldocibirdsong.mp3",
+    "duration": "2:46",
+    "playlist": "ambient-chill",
+    "sort_order": 47
+  },
+  {
+    "id": "meoodic",
+    "title": "Melodic",
+    "description": "A dreamy piece with an ethereal female vocal over a synth-driven melody in F# major.",
+    "url": "/audio/meoodic.mp3",
+    "duration": "1:43",
+    "playlist": "ambient-chill",
+    "sort_order": 48
+  },
+  {
+    "id": "newrnb",
+    "title": "New R&B",
+    "description": "Ethereal female vocals float over a synth-driven melody with a groovy bassline and a danceable beat. Lush and immersive, it would suit a summer-festival edit or a chilled lounge.",
+    "url": "/audio/newrnb.mp3",
+    "duration": "5:18",
+    "playlist": "beats-instrumentals",
+    "sort_order": 49
+  },
+  {
+    "id": "swag",
+    "title": "Swag",
+    "description": "A soul cut based on faith alone",
+    "url": "/audio/swag.mp3",
+    "duration": "2:05",
+    "playlist": "beats-instrumentals",
+    "sort_order": 50
+  },
+  {
+    "id": "bringebacktolif-remix-mixed",
+    "title": "Bring You Back",
+    "description": "remix for edits cinematic part and aggresive electronic remix second part",
+    "url": "/audio/bringebacktolif-remix-mixed.mp3",
+    "duration": "2:58",
+    "playlist": "remixes-covers",
+    "sort_order": 51
+  },
+  {
+    "id": "hoodtrap-remix",
+    "title": "Hood Trap",
+    "description": "Boom Boom BOOOM",
+    "url": "/audio/hoodtrap-remix.mp3",
+    "duration": "1:12",
+    "playlist": "remixes-covers",
+    "sort_order": 52
+  },
+  {
+    "id": "houseafromix",
+    "title": "Afro House Flip",
+    "description": "A moody electronic flip with jazzy keys and a hypnotic groove in G minor, mysterious and atmospheric.",
+    "url": "/audio/houseafromix.mp3",
+    "duration": "1:53",
+    "playlist": "beats-instrumentals",
+    "sort_order": 53
+  },
+  {
+    "id": "beautyandabeat-remix",
+    "title": "Beauty and a Beat",
+    "description": "JUSTIIIIIIIIIIIIIIIIIIIIIIIIIIn",
+    "url": "/audio/beautyandabeat-remix.mp3",
+    "duration": "2:31",
+    "playlist": "remixes-covers",
+    "sort_order": 54
+  },
+  {
+    "id": "hunt-theme",
+    "title": "Hunt Theme",
+    "description": "An eerie instrumental theme, haunting synth melodies over a spooky choral texture. Written as a game theme for a tense hunt or horror sequence.",
+    "url": "/audio/hunt-theme.mp3",
+    "duration": "1:07",
+    "playlist": "game-audio",
+    "sort_order": 55
+  },
+  {
+    "id": "main-menu-final-track",
+    "title": "Main Menu — Final",
+    "description": "A driving menu theme with heavy electric-guitar riffs, big drums, and gritty energy in D minor. Written to open a high-energy action game.",
+    "url": "/audio/main-menu-final-track.mp3",
+    "duration": "1:32",
+    "playlist": "game-audio",
+    "sort_order": 56
+  },
+  {
+    "id": "main-menu-threshold",
+    "title": "Main Menu — Threshold",
+    "description": "A dark, atmospheric menu bed with organic, cinematic textures. Written to sit under a game's main menu with a tense, expectant mood.",
+    "url": "/audio/main-menu-threshold.mp3",
+    "duration": "1:10",
+    "playlist": "game-audio",
+    "sort_order": 57
+  },
+  {
+    "id": "main-menu-click",
+    "title": "Menu UI — Click",
+    "description": "A crisp UI click for a game menu selection.",
+    "url": "/audio/main-menu-click.mp3",
+    "duration": "0:00",
+    "playlist": "game-audio",
+    "sort_order": 58
+  },
+  {
+    "id": "main-menu-hover",
+    "title": "Menu UI — Hover",
+    "description": "A soft UI hover cue for navigating a game menu.",
+    "url": "/audio/main-menu-hover.mp3",
+    "duration": "0:00",
+    "playlist": "game-audio",
+    "sort_order": 59
+  },
+  {
+    "id": "running-loopable-1",
+    "title": "Running Footsteps",
+    "description": "A seamless running-footsteps loop on a hard surface, foley for a moving character.",
+    "url": "/audio/running-loopable-1.mp3",
+    "duration": "0:15",
+    "playlist": "game-audio",
+    "sort_order": 60
+  },
+  {
+    "id": "walking-regular-loopable",
+    "title": "Walking Footsteps",
+    "description": "A seamless walking-footsteps loop on a hard surface, foley for a moving character.",
+    "url": "/audio/walking-regular-loopable.mp3",
+    "duration": "0:20",
+    "playlist": "game-audio",
+    "sort_order": 61
+  },
+  {
+    "id": "walking-slow-loopable",
+    "title": "Slow Walk",
+    "description": "A seamless slow-walking footsteps loop, foley for a character moving at an easy pace.",
+    "url": "/audio/walking-slow-loopable.mp3",
+    "duration": "0:26",
+    "playlist": "game-audio",
+    "sort_order": 62
+  },
+  {
+    "id": "running-stop-shuffle",
+    "title": "Footstep Stop",
+    "description": "A quick stop-and-shuffle footstep cue, foley for a character halting or turning.",
+    "url": "/audio/running-stop-shuffle.mp3",
+    "duration": "0:01",
+    "playlist": "game-audio",
+    "sort_order": 63
+  },
+  {
+    "id": "step-1",
+    "title": "Footstep",
+    "description": "A single footstep of a heavy bot on a hard surface, game foley.",
+    "url": "/audio/step-1.mp3",
+    "duration": "0:00",
+    "playlist": "game-audio",
+    "sort_order": 64
+  },
+  {
+    "id": "alarm-1",
+    "title": "Alarm I",
+    "description": "A short designed alarm cue, an alert tone for a UI, warning, or hazard moment.",
+    "url": "/audio/alarm-1.mp3",
+    "duration": "0:02",
+    "playlist": "game-audio",
+    "sort_order": 65
+  },
+  {
+    "id": "alarm-2",
+    "title": "Alarm II",
+    "description": "A short designed alarm cue with a harsher edge, an alert for a warning or hazard state.",
+    "url": "/audio/alarm-2.mp3",
+    "duration": "0:02",
+    "playlist": "game-audio",
+    "sort_order": 66
+  },
+  {
+    "id": "granular-textures-cordpath-2-granular-2",
+    "title": "Granular Chordpath",
+    "description": "A granular, evolving texture built from processed chords, hypnotic and slightly psychedelic. ",
+    "url": "/audio/granular-textures-cordpath-2-granular-2.mp3",
+    "duration": "1:06",
+    "playlist": "sound-design-fx",
+    "sort_order": 67
+  },
+  {
+    "id": "robot-ambience-1",
+    "title": "Robot Ambience I",
+    "description": "A glitchy, mechanical ambience built from processed synth and sampler textures, abstract and futuristic. Designed for a robotic or sci-fi environment.",
+    "url": "/audio/robot-ambience-1.mp3",
+    "duration": "0:12",
+    "playlist": "sound-design-fx",
+    "sort_order": 68
+  },
+  {
+    "id": "robot-ambience-2",
+    "title": "Robot Ambience II",
+    "description": "A raw, experimental noise bed of dissonant tones and ambient texture, dark and uneasy. Designed for a suspense scene or a machine-world environment.",
+    "url": "/audio/robot-ambience-2.mp3",
+    "duration": "0:25",
+    "playlist": "sound-design-fx",
+    "sort_order": 69
+  },
+  {
+    "id": "robot-ambience-3",
+    "title": "Robot Ambience III",
+    "description": "Experimental glitch textures meet mechanical noise for a cold, futuristic soundscape. Designed for a machine city or a dystopian sci-fi environment.",
+    "url": "/audio/robot-ambience-3.mp3",
+    "duration": "0:43",
+    "playlist": "sound-design-fx",
+    "sort_order": 70
+  },
+  {
+    "id": "limboloop-fx",
+    "title": "Limbo Loop",
+    "description": "A dreamy, loopable synth bed over a soft electronic pulse, designed as an ambient background loop. Built to sit under menus, transitions, or atmospheric scenes.",
+    "url": "/audio/limboloop-fx.mp3",
+    "duration": "1:04",
+    "playlist": "sound-design-fx",
+    "sort_order": 71
+  },
+  {
+    "id": "leap-of-faith",
+    "title": "Hold my Hand",
+    "description": "A short, suspenseful stinger, an eerie piano figure under tense strings.",
+    "url": "/audio/leap-of-faith.mp3",
+    "duration": "1:18",
+    "playlist": "beats-instrumentals",
+    "sort_order": 72
+  },
+  {
+    "id": "scene-complete",
+    "title": "Scene",
+    "description": "A spine-chilling cue, eerie effects, atmospheric strings, and suspenseful piano building an ominous mood. Built for a horror or psychological-thriller scene.",
+    "url": "/audio/scene-complete.mp3",
+    "duration": "1:16",
+    "playlist": "sound-design-fx",
+    "sort_order": 73
+  },
+  {
+    "id": "stupid",
+    "title": "Soundscape",
+    "description": "A haunting soundscape of eerie strings, synths, and designed effects. Built for a horror bed of jump scares and creeping suspense.",
+    "url": "/audio/stupid.mp3",
+    "duration": "0:46",
+    "playlist": "sound-design-fx",
+    "sort_order": 74
+  }
+]

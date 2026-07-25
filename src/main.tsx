@@ -10,13 +10,16 @@ import './index.css'
 import { App } from './App'
 import { ContentProvider } from './lib/content'
 import { ProjectsProvider } from './lib/projects-store'
+import { SoundProvider } from './lib/sound-store'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
       <ContentProvider>
         <ProjectsProvider>
-          <App />
+          <SoundProvider>
+            <App />
+          </SoundProvider>
         </ProjectsProvider>
       </ContentProvider>
     </BrowserRouter>

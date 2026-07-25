@@ -18,19 +18,20 @@ const FFMPEG = require('ffmpeg-static')
 
 const GEMINI_KEY = process.env.GEMINI_API_KEY
 const FOLDER = process.env.DRIVE_FOLDER || process.argv[2]
+const LOCAL = process.env.SOUND_SRC // if set, use this local folder instead of downloading
 const MODEL = process.env.GEMINI_MODEL || 'gemini-2.0-flash'
+const DELAY = Number(process.env.GEMINI_DELAY_MS || 4500) // pace to respect free-tier RPM
 
 if (!GEMINI_KEY) throw new Error('Set GEMINI_API_KEY')
-if (!FOLDER) throw new Error('Pass the public Drive folder URL (or set DRIVE_FOLDER)')
+if (!FOLDER && !LOCAL) throw new Error('Pass the Drive folder URL (or set DRIVE_FOLDER / SOUND_SRC)')
 
 const PLAYLISTS = {
-  'Impacts & Hits': { colors: ['#3b1d5e', '#c34a3e'], description: 'Booms, hits, and stingers with weight.' },
-  'Risers & Builds': { colors: ['#5e2a1d', '#d98a3e'], description: 'Tension risers and builds toward a moment.' },
-  'Whooshes & Transitions': { colors: ['#1a2a52', '#4a6cc3'], description: 'Movement and transitions for cuts and reveals.' },
-  'Atmospheres & Drones': { colors: ['#0b3d3a', '#1d6e5e'], description: 'Evolving textures and tension beds.' },
-  'Foley & Textures': { colors: ['#4a3410', '#b98a2f'], description: 'Recorded and processed foley, designed to detail.' },
-  'Music & Score': { colors: ['#3a1a4a', '#8a4ac3'], description: 'Musical cues, beds, and scored moments.' },
-  'UI & Motion': { colors: ['#12303a', '#2f9ab9'], description: 'Interface, motion-graphics, and mnemonic sounds.' },
+  'Beats & Instrumentals': { colors: ['#3b1d5e', '#c34a3e'], description: 'Original beats and instrumental productions.' },
+  'Ambient & Chill': { colors: ['#0b3d3a', '#1d6e5e'], description: 'Atmospheric, ambient, and downtempo pieces.' },
+  'Remixes & Covers': { colors: ['#1a2a52', '#4a6cc3'], description: 'Flips, remixes, and reimagined tracks.' },
+  'Game Audio': { colors: ['#12303a', '#2f9ab9'], description: 'Music and sound designed for games.' },
+  'Sound Design & FX': { colors: ['#4a3410', '#b98a2f'], description: 'Impacts, alarms, textures, and designed sound.' },
+  'Vocals & Voice': { colors: ['#3a1a4a', '#8a4ac3'], description: 'Vocal work, chops, and voice.' },
   Other: { colors: ['#2a2a30', '#444'], description: 'Everything else worth a listen.' },
 }
 const CATEGORIES = Object.keys(PLAYLISTS).filter((c) => c !== 'Other')
@@ -64,9 +65,9 @@ function durationOf(file) {
 }
 
 async function analyze(b64) {
-  const prompt = `You are cataloguing a sound designer's audio clip for a portfolio website. Listen to the clip and reply in EXACTLY this format, nothing else:
-TITLE: <a punchy 2-4 word title>
-DESC: <one concise sentence, max 16 words, describing its sonic character>
+  const prompt = `You are cataloguing a music/sound producer's audio clip for a portfolio website. Listen to the FULL clip and reply in EXACTLY this format, nothing else:
+TITLE: <a punchy 2-5 word title in Title Case>
+DESC: <exactly two sentences. Sentence one: the sound, mood, genre, tempo feel, and key instrumentation. Sentence two: where it would fit — a scene, a game, a type of project. Be specific and evocative, never generic.>
 PLAYLIST: <the single best fit from: ${CATEGORIES.join(' | ')}>`
   for (let attempt = 0; attempt < 4; attempt++) {
     const r = await fetch(
@@ -90,14 +91,22 @@ PLAYLIST: <the single best fit from: ${CATEGORIES.join(' | ')}>`
   throw new Error('Rate limited by Gemini after retries')
 }
 
-console.log('⬇  Downloading Drive folder…')
-execSync(`python -m gdown --folder "${FOLDER}" -O "${TMP}"`, { stdio: 'inherit' })
+let srcDir = TMP
+if (LOCAL) {
+  srcDir = LOCAL
+  console.log(`📂 Using local folder: ${srcDir}`)
+} else {
+  console.log('⬇  Downloading Drive folder…')
+  execSync(`python -m gdown --folder "${FOLDER}" -O "${TMP}"`, { stdio: 'inherit' })
+}
 
-const files = walk(TMP).filter((f) => AUDIO_EXT.includes(path.extname(f).toLowerCase()))
-console.log(`🎧 Found ${files.length} audio files.\n`)
+const files = walk(srcDir).filter((f) => AUDIO_EXT.includes(path.extname(f).toLowerCase()))
+const LIMIT = Number(process.env.SOUND_LIMIT || 0)
+const queue = LIMIT ? files.slice(0, LIMIT) : files
+console.log(`🎧 Found ${files.length} audio files${LIMIT ? ` (processing first ${queue.length})` : ''}.\n`)
 
 const tracks = []
-for (const [i, file] of files.entries()) {
+for (const [i, file] of queue.entries()) {
   const base = path.basename(file, path.extname(file))
   const slug = slugify(base) || `track-${i}`
   const mp3 = path.join(OUT_AUDIO, `${slug}.mp3`)
@@ -115,15 +124,16 @@ for (const [i, file] of files.entries()) {
   try {
     const text = await analyze(b64)
     title = (text.match(/TITLE:\s*(.+)/i)?.[1] || title).trim()
-    description = (text.match(/DESC:\s*(.+)/i)?.[1] || '').trim()
+    const dm = text.match(/DESC:\s*([\s\S]*?)\s*PLAYLIST:/i) || text.match(/DESC:\s*([\s\S]+)/i)
+    description = (dm?.[1] || '').trim().replace(/\s+/g, ' ')
     const pl = (text.match(/PLAYLIST:\s*(.+)/i)?.[1] || 'Other').trim()
     playlist = CATEGORIES.find((c) => pl.toLowerCase().includes(c.toLowerCase().split(' ')[0])) || 'Other'
   } catch (e) {
     console.log(`  ! Gemini failed for ${base}: ${e.message}`)
   }
   tracks.push({ id: slug, title, description, url: `/audio/${slug}.mp3`, duration, playlist })
-  console.log(`  ${i + 1}/${files.length}  ${title}  →  ${playlist}`)
-  await new Promise((res) => setTimeout(res, 1200)) // be gentle on the free tier
+  console.log(`  ${i + 1}/${queue.length}  ${title}  →  ${playlist}`)
+  await new Promise((res) => setTimeout(res, DELAY)) // be gentle on the free tier
 }
 
 // Group into playlists and write src/data/sound.ts
@@ -160,5 +170,5 @@ fs.writeFileSync(
   `${header}export const soundPlaylists: SoundPlaylist[] = [\n${playlistsTs}\n]\n`,
 )
 
-fs.rmSync(TMP, { recursive: true, force: true })
+if (!LOCAL) fs.rmSync(TMP, { recursive: true, force: true })
 console.log(`\n✅ Done. ${tracks.length} tracks across ${grouped.length} playlists → src/data/sound.ts + public/audio/`)
