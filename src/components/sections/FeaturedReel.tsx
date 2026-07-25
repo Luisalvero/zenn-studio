@@ -24,16 +24,21 @@ export function FeaturedReel() {
               A first look at the work
             </h2>
           </Reveal>
-          <Reveal delay={0.1}>
-            <a
-              href={watchUrl(provider, id)}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm text-mist underline-offset-4 transition-colors hover:text-chalk hover:underline"
-            >
-              Watch on {providerName(provider)} ↗
-            </a>
-          </Reveal>
+          {/* Only surface an external "watch" link for hosts meant for public
+              viewing (YouTube/Vimeo). For Drive we deliberately DON'T expose the
+              file link, since that's where the download button lives. */}
+          {provider !== 'drive' && provider !== 'file' && (
+            <Reveal delay={0.1}>
+              <a
+                href={watchUrl(provider, id)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-mist underline-offset-4 transition-colors hover:text-chalk hover:underline"
+              >
+                Watch on {providerName(provider)} ↗
+              </a>
+            </Reveal>
+          )}
         </div>
 
         <motion.div

@@ -1,12 +1,13 @@
 import { useState, type ReactNode } from 'react'
 import { Link } from 'react-router-dom'
-import { Loader2, LogOut, Inbox, SlidersHorizontal, Film, Music2, ArrowLeft, ShieldAlert } from 'lucide-react'
+import { Loader2, LogOut, Inbox, SlidersHorizontal, Film, Music2, Download, ArrowLeft, ShieldAlert } from 'lucide-react'
 import { SEO } from '@/components/ui/SEO'
 import { GoogleIcon } from '@/components/ui/BrandIcons'
 import { LeadsPanel } from '@/components/admin/LeadsPanel'
 import { ContentPanel } from '@/components/admin/ContentPanel'
 import { PortfolioPanel } from '@/components/admin/PortfolioPanel'
 import { SoundPanel } from '@/components/admin/SoundPanel'
+import { RequestsPanel } from '@/components/admin/RequestsPanel'
 import { useAuth } from '@/hooks/useAuth'
 import { ADMIN_EMAIL } from '@/lib/supabase'
 import { cn } from '@/lib/utils'
@@ -21,12 +22,13 @@ function AdminShell({ children }: { children: ReactNode }) {
   )
 }
 
-type Tab = 'leads' | 'content' | 'portfolio' | 'sound'
+type Tab = 'leads' | 'content' | 'portfolio' | 'sound' | 'requests'
 const TABS = [
   { key: 'leads', label: 'Leads', icon: Inbox, soon: false },
   { key: 'content', label: 'Content', icon: SlidersHorizontal, soon: false },
   { key: 'portfolio', label: 'Portfolio', icon: Film, soon: false },
   { key: 'sound', label: 'Sound', icon: Music2, soon: false },
+  { key: 'requests', label: 'Requests', icon: Download, soon: false },
 ] as const
 
 export function AdminPage() {
@@ -107,14 +109,26 @@ export function AdminPage() {
                 </span>
               </div>
               <div className="flex items-center gap-4">
-                <span className="hidden text-xs text-ash sm:inline">{user?.email ?? 'Local dev (no login)'}</span>
-                <button
-                  onClick={() => signOut()}
-                  className="inline-flex items-center gap-2 rounded-full border border-white/15 px-4 py-2 text-xs text-bone transition-colors hover:bg-white/5"
-                >
-                  <LogOut className="h-3.5 w-3.5" />
-                  Sign out
-                </button>
+                <span className="hidden text-xs text-ash sm:inline">
+                  {user?.email ?? 'Local dev — not signed in'}
+                </span>
+                {user ? (
+                  <button
+                    onClick={() => signOut()}
+                    className="inline-flex items-center gap-2 rounded-full border border-white/15 px-4 py-2 text-xs text-bone transition-colors hover:bg-white/5"
+                  >
+                    <LogOut className="h-3.5 w-3.5" />
+                    Sign out
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => signIn()}
+                    className="inline-flex items-center gap-2 rounded-full bg-chalk px-4 py-2 text-xs font-medium text-void transition-colors hover:bg-bone"
+                  >
+                    <GoogleIcon className="h-4 w-4" />
+                    Sign in
+                  </button>
+                )}
               </div>
             </header>
 
@@ -149,6 +163,7 @@ export function AdminPage() {
               {tab === 'content' && <ContentPanel />}
               {tab === 'portfolio' && <PortfolioPanel />}
               {tab === 'sound' && <SoundPanel />}
+              {tab === 'requests' && <RequestsPanel />}
 
               <Link
                 to="/"

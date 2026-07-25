@@ -21,6 +21,7 @@ export function VideoEmbed({ provider, id, title = 'Video', className, orientati
 
   return (
     <div
+      onContextMenu={(e) => e.preventDefault()}
       className={cn(
         'relative w-full overflow-hidden rounded-xl border border-white/10 bg-black',
         orientation === 'portrait' ? 'aspect-[9/16]' : 'aspect-video',
@@ -34,6 +35,9 @@ export function VideoEmbed({ provider, id, title = 'Video', className, orientati
             src={id}
             title={title}
             controls
+            controlsList="nodownload noplaybackrate noremoteplayback"
+            disablePictureInPicture
+            onContextMenu={(e) => e.preventDefault()}
             playsInline
             preload="metadata"
           />
