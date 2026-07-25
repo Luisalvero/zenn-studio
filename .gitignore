@@ -31,4 +31,6 @@ node_modules/.tmp
 .env
 .env.local
 .env.*.local
-public/audio/
+# Audio previews (public/audio/*.mp3) ARE committed so GitHub Pages serves them.
+# Only the local analysis checkpoint stays out of git.
+public/audio/_results.jsonl
