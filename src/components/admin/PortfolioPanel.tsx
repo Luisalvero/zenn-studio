@@ -320,7 +320,10 @@ function ProjectForm({
     if (!form.title.trim()) return setError('A title is required.')
     setSaving(true)
     setError('')
-    const slug = form.slug.trim() || slugify(form.title)
+    // Always slugify, and ignore a pasted URL in the slug field (a common
+    // mix-up with the video field) — derive a clean slug from the title instead.
+    const typedSlug = form.slug.trim()
+    const slug = slugify(typedSlug && !/^https?:\/\//i.test(typedSlug) ? typedSlug : form.title)
     const payload = {
       slug,
       title: form.title.trim(),
@@ -361,8 +364,8 @@ function ProjectForm({
         <Field label="Title">
           <input className={input} value={form.title} onChange={(e) => set('title', e.target.value)} />
         </Field>
-        <Field label="Slug (URL)">
-          <input className={input} value={form.slug} placeholder={slugify(form.title) || 'auto'} onChange={(e) => set('slug', e.target.value)} />
+        <Field label="Page slug · auto from title (not the video link)">
+          <input className={input} value={form.slug} placeholder={slugify(form.title) || 'leave blank to auto-fill'} onChange={(e) => set('slug', e.target.value)} />
         </Field>
       </div>
 
