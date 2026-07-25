@@ -91,7 +91,7 @@ PLAYLIST: <the single best fit from: ${CATEGORIES.join(' | ')}>`
 }
 
 console.log('⬇  Downloading Drive folder…')
-execSync(`python -m gdown --folder "${FOLDER}" -O "${TMP}" --remaining-ok`, { stdio: 'inherit' })
+execSync(`python -m gdown --folder "${FOLDER}" -O "${TMP}"`, { stdio: 'inherit' })
 
 const files = walk(TMP).filter((f) => AUDIO_EXT.includes(path.extname(f).toLowerCase()))
 console.log(`🎧 Found ${files.length} audio files.\n`)
