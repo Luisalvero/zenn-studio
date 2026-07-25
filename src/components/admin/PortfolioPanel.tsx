@@ -242,6 +242,7 @@ function ProjectForm({
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState('')
   const [uploading, setUploading] = useState<string | null>(null)
+  const [processing, setProcessing] = useState<string | null>(null)
 
   function set<K extends keyof Form>(key: K, value: Form[K]) {
     setForm((f) => ({ ...f, [key]: value }))
@@ -261,31 +262,57 @@ function ProjectForm({
     }))
   }
 
-  async function upload(file: File, field: 'thumbnail' | 'preview_video' | 'video', folder: string) {
-    if (file.size > 100 * 1024 * 1024) {
-      setError('That file is over 100 MB — please use a smaller file or a link.')
-      return
-    }
+  async function uploadMedia(data: Blob, folder: string, ext: string, contentType: string): Promise<string> {
+    const path = `${folder}/${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`
+    const { error } = await supabase.storage
+      .from('project-media')
+      .upload(path, data, { upsert: true, contentType })
+    if (error) throw error
+    return supabase.storage.from('project-media').getPublicUrl(path).data.publicUrl
+  }
+
+  async function upload(file: File, field: 'thumbnail' | 'preview_video', folder: string) {
+    if (file.size > 100 * 1024 * 1024) return setError('That file is over 100 MB.')
     setUploading(field)
     setError('')
     try {
-      const ext = file.name.split('.').pop() || 'bin'
-      const path = `${folder}/${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`
-      const { error } = await supabase.storage
-        .from('project-media')
-        .upload(path, file, { upsert: true, contentType: file.type })
-      if (error) throw error
-      const url = supabase.storage.from('project-media').getPublicUrl(path).data.publicUrl
-      if (field === 'thumbnail') set('thumbnail', url)
-      else if (field === 'preview_video') set('preview_video', url)
-      else {
-        set('video_provider', 'file')
-        set('video_id', url)
-      }
+      const url = await uploadMedia(file, folder, file.name.split('.').pop() || 'bin', file.type)
+      set(field, url)
     } catch (e) {
       setError(e instanceof Error ? e.message : 'Upload failed.')
     } finally {
       setUploading(null)
+    }
+  }
+
+  // Upload a video AND auto-generate its poster + muted hover-preview (ffmpeg.wasm).
+  async function handleVideoUpload(file: File) {
+    if (file.size > 100 * 1024 * 1024) return setError('That video is over 100 MB — use a link, or a smaller file.')
+    setUploading('video')
+    setError('')
+    try {
+      const ext = file.name.split('.').pop() || 'mp4'
+      const videoUrl = await uploadMedia(file, 'videos', ext, file.type)
+      setForm((f) => ({ ...f, video_provider: 'file', video_id: videoUrl }))
+
+      setProcessing('Generating poster + hover preview… (loads a one-time processor; can take up to a minute)')
+      const { detectOrientation, generatePreviewAssets } = await import('@/lib/ffmpeg')
+      const orientation = (await detectOrientation(file)) as string
+      setForm((f) => ({ ...f, orientation }))
+      const { poster, preview } = await generatePreviewAssets(file, orientation as 'landscape' | 'portrait')
+      const [posterUrl, previewUrl] = await Promise.all([
+        uploadMedia(poster, 'thumbnails', 'jpg', 'image/jpeg'),
+        uploadMedia(preview, 'previews', 'mp4', 'video/mp4'),
+      ])
+      setForm((f) => ({ ...f, thumbnail: posterUrl, preview_video: previewUrl }))
+    } catch (e) {
+      setError(
+        (e instanceof Error ? e.message : 'Processing failed') +
+          ' — the video uploaded, but auto-preview failed. You can still add a thumbnail/preview manually.',
+      )
+    } finally {
+      setUploading(null)
+      setProcessing(null)
     }
   }
 
@@ -397,12 +424,12 @@ function ProjectForm({
           defaultValue={form.video_provider === 'file' ? form.video_id : ''}
           onChange={(e) => onVideoUrl(e.target.value)}
         />
-        <div className="mt-2 flex items-center gap-3 text-xs text-ash">
+        <div className="mt-2 flex flex-wrap items-center gap-3 text-xs text-ash">
           <UploadButton
             accept="video/*"
             busy={uploading === 'video'}
-            label="Upload video (≤100 MB)"
-            onFile={(f) => upload(f, 'video', 'videos')}
+            label="Upload video → auto poster + preview"
+            onFile={handleVideoUpload}
           />
           {form.video_id && (
             <span className="text-mist">
@@ -410,6 +437,15 @@ function ProjectForm({
             </span>
           )}
         </div>
+        {processing && (
+          <p className="mt-2 flex items-center gap-2 text-xs text-mist">
+            <Loader2 className="h-3.5 w-3.5 animate-spin" /> {processing}
+          </p>
+        )}
+        <p className="mt-1.5 text-[0.7rem] text-ash">
+          Uploading a video file auto-creates the poster + muted hover-preview in your browser. For a
+          YouTube/Vimeo/Drive link, paste it above (thumbnail can be auto-pulled for YouTube).
+        </p>
       </Field>
 
       <Field label="Thumbnail (poster image)">
