@@ -23,6 +23,7 @@ const NotFoundPage = lazy(() =>
   import('@/pages/NotFoundPage').then((m) => ({ default: m.NotFoundPage })),
 )
 const AdminPage = lazy(() => import('@/pages/AdminPage').then((m) => ({ default: m.AdminPage })))
+const SoundPage = lazy(() => import('@/pages/SoundPage').then((m) => ({ default: m.SoundPage })))
 
 /** Minimal, on-brand fallback while a route chunk loads. */
 function RouteFallback() {
@@ -41,6 +42,7 @@ export function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/portfolio" element={<PortfolioPage />} />
             <Route path="/portfolio/:slug" element={<ProjectPage />} />
+            <Route path="/sound" element={<SoundPage />} />
             <Route path="/services" element={<ServicesPage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/contact" element={<ContactPage />} />

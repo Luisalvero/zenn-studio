@@ -107,6 +107,7 @@ export const siteConfig: SiteConfig = {
   nav: [
     { label: 'Home', href: '/' },
     { label: 'Portfolio', href: '/portfolio' },
+    { label: 'Sound', href: '/sound' },
     { label: 'Services', href: '/services' },
     { label: 'About', href: '/about' },
     { label: 'Contact', href: '/contact' },
