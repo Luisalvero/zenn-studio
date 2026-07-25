@@ -2,6 +2,7 @@ import { SEO } from '@/components/ui/SEO'
 import { Marquee } from '@/components/ui/Marquee'
 import { Hero } from '@/components/sections/Hero'
 import { FeaturedReel } from '@/components/sections/FeaturedReel'
+import { BeforeAfter } from '@/components/sections/BeforeAfter'
 import { PortfolioPreview } from '@/components/sections/PortfolioPreview'
 import { ServicesPreview } from '@/components/sections/ServicesPreview'
 import { AboutPreview } from '@/components/sections/AboutPreview'
@@ -29,6 +30,7 @@ export function HomePage() {
       <Hero />
       <FeaturedReel />
       <Marquee items={marqueeWords} className="border-y border-white/5" />
+      <BeforeAfter />
       <PortfolioPreview />
       <ServicesPreview />
       <AboutPreview />
